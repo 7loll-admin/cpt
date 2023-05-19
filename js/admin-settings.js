@@ -4,7 +4,7 @@ import App from './Component/App';
 import { StateProvider } from './Utils/StateProvider';
 import reducer, { initialState } from './Utils/reducer';
 
-const root = ReactDOM.createRoot( document.getElementById( 'media_root' ) );
+const root = ReactDOM.createRoot( document.getElementById( 'cptwooint_root' ) );
 
 /*
   - Columns is a simple array right now, but it will contain some logic later on. It is recommended by react-table to memoize the columns data

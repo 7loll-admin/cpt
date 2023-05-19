@@ -22,7 +22,7 @@ class FilterHooks {
 	 */
 	public static function init_hooks() {
         // Plugins Setting Page.
-        add_filter( 'plugin_action_links_' . TSMLT_BASENAME,  [ __CLASS__, 'plugins_setting_links' ] );
+        add_filter( 'plugin_action_links_' . CPTWI_BASENAME,  [ __CLASS__, 'plugins_setting_links' ] );
 	}
 
     /**

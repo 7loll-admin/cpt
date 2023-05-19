@@ -14,7 +14,7 @@ use TinySolutions\cptwooint\Traits\SingletonTrait;
  *
  * @author Mostafa <mostafa.soufi@hotmail.com>
  */
-class SubMenu {
+class AdminMenu {
     /**
      * Singleton
      */
@@ -34,10 +34,10 @@ class SubMenu {
      */
     public function register_sub_menu() {
 	    add_menu_page(
-			'WPVue',
-			'WPVue',
+			'WC Init',
+			'WC Init',
 			'manage_options',
-			'admin/admin.php',
+			'cptwooint/admin.php',
 			[$this, 'wp_media_page_callback'],
 			'dashicons-tickets',
 			6

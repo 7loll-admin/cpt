@@ -2,7 +2,6 @@
 
 namespace TinySolutions\cptwooint\Controllers;
 
-use TinySolutions\cptwooint\Controllers\Admin\Settings;
 use TinySolutions\cptwooint\Traits\SingletonTrait;
 
 // Do not allow directly accessing this file.
@@ -69,7 +68,7 @@ class AssetsController
 
         $current_screen =  get_current_screen() ;
 
-        if ( isset( $current_screen->id ) && 'media_page_cptwooint-settings' === $current_screen->id ){
+        if ( isset( $current_screen->id ) && 'toplevel_page_cptwooint/admin' === $current_screen->id ){
 
             wp_enqueue_style('cptwooint-settings');
             wp_enqueue_script('cptwooint-settings');
@@ -80,8 +79,6 @@ class AssetsController
                 [
                     'ajaxUrl' => esc_url(admin_url('admin-ajax.php')),
                     'adminUrl' => esc_url(admin_url()),
-                    'includesUrl' => esc_url(includes_url()),
-                    'settings' => Settings::instance()->get_sections(),
                     'restApiUrl' => esc_url_raw(rest_url()), // site_url(rest_get_url_prefix()),
                     'rest_nonce' => wp_create_nonce( 'wp_rest' ),
                     cptwooint()->nonceId => wp_create_nonce(cptwooint()->nonceId),

@@ -17,7 +17,7 @@ use TinySolutions\cptwooint\Controllers\Dependencies;
 use TinySolutions\cptwooint\Controllers\AssetsController;
 use TinySolutions\cptwooint\Controllers\Hooks\FilterHooks;
 use TinySolutions\cptwooint\Controllers\Hooks\ActionHooks;
-use TinySolutions\cptwooint\Controllers\Admin\SubMenu;
+use TinySolutions\cptwooint\Controllers\Admin\AdminMenu;
 use TinySolutions\cptwooint\Controllers\Admin\Api;
 use TinySolutions\cptwooint\Controllers\Admin\RegisterPostAndTax;
 use TinySolutions\cptwooint\Controllers\Admin\Review;
@@ -77,7 +77,7 @@ if ( ! class_exists( CptWooInt::class ) ) {
 		 */
 		public function get_assets_uri( $file ) {
 			$file = ltrim( $file, '/' );
-			return trailingslashit( TSMLT_URL . '/assets' ) . $file;
+			return trailingslashit( CPTWI_URL . '/assets' ) . $file;
 		}
 
 		/**
@@ -120,8 +120,7 @@ if ( ! class_exists( CptWooInt::class ) ) {
             Review::instance();
 			// Include File.
             AssetsController::instance();
-            SubMenu::instance();
-            RegisterPostAndTax::instance();
+            AdminMenu::instance();
             FilterHooks::init_hooks();
 			ActionHooks::init_hooks();
             Api::instance();

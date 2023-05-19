@@ -30,4 +30,4 @@ define( 'CPTWI_ABSPATH', dirname(CPTWI_FILE ) );
 /**
  * App Init.
  */
-require_once 'app/cptwppint.php';
+require_once 'app/cptwooint.php';

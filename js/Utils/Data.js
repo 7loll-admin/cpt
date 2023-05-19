@@ -33,36 +33,10 @@ export const notifications = ( isTrue, text ) => {
     }
 }
 
-export const getMedia = async ( url = '', prams = {} ) => {
-    const result = await Api.get( `${url}`, { params: prams } );
-    return JSON.parse( result.data );
-}
-
-export const upDateSingleMedia = async ( prams ) => {
-    const response = await Api.post(`/update`, prams );
-    // for info - blue box
-    notifications( 200 === response.status && response.data.updated, response.data.message );
-    return response;
-}
-
-export const submitBulkMediaAction = async ( prams ) => {
-    const response = await Api.post(`/bulk/submit`, prams );
-    notifications( 200 === response.status && response.data.updated, response.data.message );
-    return response;
-}
-
 export const updateOptins = async (  prams ) => {
     const response = await Api.post(`/updateoptins`, prams );
     notifications( 200 === response.status && response.data.updated, response.data.message );
     return response;
-}
-
-export const getDates = async () => {
-    return await Api.get(`/filter/getdates`);
-}
-
-export const getTerms = async () => {
-    return await Api.get(`/getterms`);
 }
 
 export const getOptions = async () => {
