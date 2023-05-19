@@ -3,32 +3,16 @@ import React, { useEffect } from "react";
 import { Layout } from 'antd';
 
 import {
-    getTerms,
-    getDates,
-    getMedia,
     getOptions,
-    updateOptins,
-    upDateSingleMedia,
-    submitBulkMediaAction
+    updateOptins
 } from "../Utils/Data";
 
 const { Sider } = Layout;
 
-import Settings from "./Settings";
-
-import MainHeader from "./MainHeader";
-
 import * as Types from "../Utils/actionType";
 
-import Datatable from "./ListTable/Datatable";
 
 import { useStateValue } from "../Utils/StateProvider";
-
-import { defaultBulkSubmitData } from "../Utils/UtilData";
-
-import RenamerTableData from "./Renamer/RenamerTableData";
-
-import RabbisFile from "./RabbisFile/RabbisFile";
 
 function App() {
 
@@ -82,7 +66,7 @@ function App() {
                 height: 'calc( 100vh - 110px )',
             }}>
                 <Sider style={{ borderRadius: '5px' }}>
-                    <MainHeader/>
+                    Hello
                 </Sider>
                 <Layout className="layout" style={{ padding: '10px', overflowY: 'auto' }} >
                         sefttings

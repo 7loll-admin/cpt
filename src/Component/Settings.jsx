@@ -12,7 +12,6 @@ import {
 
 const { Content } = Layout;
 
-
 import * as Types from "../Utils/actionType";
 
 function Settings() {
