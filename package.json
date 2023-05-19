@@ -1,0 +1,17 @@
+{
+  "name": "cpt-woo-integration",
+  "version": "0.0.1",
+  "main": "index.js",
+  "repository": "https://github.com/mamunur105/cpt-woo-integration.git",
+  "author": "Mamunur Rashid <30565480+mamunur105@users.noreply.github.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "vite": "^4.3.8"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^5.1.0",
+    "antd": "^5.5.0",
+    "axios": "^1.4.0",
+    "toastr": "^2.1.4"
+  }
+}

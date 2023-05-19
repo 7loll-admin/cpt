@@ -1,0 +1,15 @@
+{
+  "name": "tinysolutions/cpt-woo-integration",
+  "authors": [
+    {
+      "name": "TinySolutions",
+      "email": "wptinysolution@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "TinySolutions\\cptwooint\\": "app"
+    }
+  },
+  "description": ""
+}
