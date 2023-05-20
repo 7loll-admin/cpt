@@ -35,8 +35,7 @@ class Fns {
 	 */
 	public static function verify_nonce() {
 		$nonce     = isset( $_REQUEST[ cptwooint()->nonceId ] ) ? $_REQUEST[ cptwooint()->nonceId ] : null;
-		$nonceText = cptwooint()->nonceText;
-		if ( wp_verify_nonce( $nonce, $nonceText ) ) {
+		if ( wp_verify_nonce( $nonce, cptwooint()->nonceId ) ) {
 			return true;
 		}
 

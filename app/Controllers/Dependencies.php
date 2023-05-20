@@ -2,6 +2,7 @@
 
 namespace TinySolutions\cptwooint\Controllers;
 
+use TinySolutions\cptwooint\Helpers\Fns;
 use TinySolutions\cptwooint\Traits\SingletonTrait;
 
 // Do not allow directly accessing this file.
@@ -33,6 +34,10 @@ class Dependencies {
 	 */
 	public function check() {
 
+		add_action( 'wp_ajax_cptwooint_plugin_activation', [ __CLASS__, 'activate_plugin'] );
+		// TODO:: AJax plugin installation will do later.
+		self::notice();
+
 		if ( version_compare( PHP_VERSION, self::MINIMUM_PHP_VERSION, '<' ) ) {
 			add_action( 'admin_notices', [ $this, 'minimum_php_version' ] );
 			$this->allOk = false;
@@ -59,7 +64,6 @@ class Dependencies {
 					esc_html__( 'plugin to be active. Please activate WooCommerce to continue.', 'cptwooint' )
 				);
 				$button_text    = esc_html__( 'Activate WooCommerce', 'cptwooint' );
-
 			} else {
 				$activation_url = wp_nonce_url( self_admin_url( 'update.php?action=install-plugin&plugin=woocommerce' ), 'install-plugin_woocommerce' );
 				$message        = sprintf(
@@ -78,8 +82,10 @@ class Dependencies {
 				'url'        => $activation_url,
 				'message'    => $message,
 				'button_txt' => $button_text,
-				'active_path' => $woocommerce,
 			];
+			if ( $this->is_plugins_installed( $woocommerce ) ) {
+                unset( $this->missing['woocommerce']['slug'] );
+            }
 		}
 
 		if ( ! empty( $this->missing ) ) {
@@ -125,15 +131,14 @@ class Dependencies {
 				$sep = ', ';
 			}
 			if ( current_user_can( 'activate_plugins' ) ) {
-				$button = '<p><a data-slug="' . esc_attr( $plugin['slug'] ) . '" href="' . esc_url( $plugin['url'] ) . '" class="button-primary plugin-install-by-ajax">' . esc_html( $plugin['button_txt'] ) . '</a></p>';
+				$button = '<p><a data-plugin="' . esc_attr( json_encode( $plugin ) ) . '" href="' . esc_url( $plugin['url'] ) . '" class="button-primary plugin-install-by-ajax">' . esc_html( $plugin['button_txt'] ) . '</a></p>';
 				// $plugin['message'] Already used escaping function
 				printf( '<div class="error notice_error"><p>%1$s</p>%2$s</div>', $plugin['message'], $button ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			} else {
 				$missingPlugins .= '<strong>' . esc_html( $plugin['name'] ) . '</strong>' . $sep;
 			}
 		}
-		// TODO:: AJax plugin installation will do later.
-		self::notice();
+
 	}
 
 	/**
@@ -156,6 +161,8 @@ class Dependencies {
 	public static function notice() {
 		add_action( 'admin_enqueue_scripts', function () {
 			wp_enqueue_script( 'jquery' );
+			wp_enqueue_script( 'updates' );
+
 		} );
 
 		add_action( 'admin_footer', function () { ?>
@@ -198,37 +205,41 @@ class Dependencies {
             </style>
             <script type="text/javascript">
                 (function ($) {
+                    function ajaxActive( that, plugin ){
+                        $.ajax({
+                            url: '<?php echo admin_url( 'admin-ajax.php' ); ?>',
+                            data: {
+                                action: 'cptwooint_plugin_activation',
+                                plugin_slug: plugin.slug ? plugin.slug : null,
+                                activation_file: plugin.file_name,
+                                cptwooint_wpnonce: '<?php echo wp_create_nonce( cptwooint()->nonceId ); ?>',
+                            },
+                            type: 'POST',
+                            beforeSend() {
+                                that.html( 'Activation Prosses Running... <div class="cptwint-loader"></div>' );
+                            },
+                            success(response) {
+                                that.html( 'Activation Prosses Done' );
+                            },
+                            error(e) {},
+                        });
+                    }
                     setTimeout(function () {
                         $('.plugin-install-by-ajax')
                             .on('click', function (e) {
                                 e.preventDefault();
                                 var that = $(this);
-                                var plugin_slug = $(this).data('slug');
-                                if ( plugin_slug ) {
+                                var plugin =  $(this).data('plugin') ;
+                                console.log( plugin.file_name )
+                                if ( plugin.slug ) {
                                     wp.updates.installPlugin({
-                                        slug: plugin_slug,
+                                        slug: plugin.slug,
                                         success: function (pluginData) {
                                             console.log( pluginData, 'Plugin installed successfully!' );
                                             if ( pluginData.activateUrl ) {
                                                 that.html( 'Activation Prosses Running... <div class="cptwint-loader"></div>' );
-                                                $.ajax({
-                                                    url: '<?php echo admin_url( 'admin-ajax.php' ); ?>',
-                                                    data: {
-                                                        action: 'cptwooint_plugin_activation',
-                                                        plugin_slug: plugin_slug ? plugin_slug : null,
-                                                        activation_url: pluginData.activateUrl.,
-                                                        cptwooint_wpnonce: '<?php echo wp_create_nonce(cptwooint()->nonceId); ?>',
-                                                    },
-                                                    type: 'POST',
-                                                    beforeSend() {
-
-                                                    },
-                                                    success(response) {
-                                                        that.html( 'Activation Prosses Done' );
-                                                        //that.parents('.notice_error').remove();
-                                                    },
-                                                    error(e) {},
-                                                });
+                                                //$(document).trigger('cptwooint_plugin_installed');
+                                                ajaxActive(that, plugin );
                                             }
                                         },
                                         error: function (error) {
@@ -239,18 +250,40 @@ class Dependencies {
                                             console.log( 'Installing plugin...!' );
                                         }
                                     });
-
+                                } else {
+                                    ajaxActive(that, plugin )
                                 }
+
                             });
                     }, 1000);
+
 
                 })(jQuery);
             </script>
 			<?php
 		} );
-
-
 	}
+
+	public static function activate_plugin() {
+		$return = [
+			'success' => false,
+		];
+		if ( ! Fns::verify_nonce() ) {
+			wp_send_json_error($return);
+		}
+		if (is_plugin_inactive( $_REQUEST['activation_file'] )) {
+			error_log( print_r( sanitize_text_field( $_REQUEST['activation_file'] ) , true ) . "\n\n", 3, __DIR__ . '/the_log.txt' );
+			activate_plugin( $_REQUEST['activation_file'] );
+			$return['success'] = true;
+		}
+        if( $return['success'] ){
+		    return wp_send_json_success( $return );
+        } else {
+	        wp_send_json_error( $return );
+        }
+		wp_die();
+	}
+
 
 
 }
