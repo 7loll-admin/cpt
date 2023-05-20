@@ -35,12 +35,6 @@ if ( ! class_exists( CptWooInt::class ) ) {
 		 */
 		public $nonceId = 'cptwooint_wpnonce';
 
-		/**
-		 * Post Type.
-		 *
-		 * @var string
-		 */
-//		public $current_theme;
         /**
          * Post Type.
          *
@@ -56,8 +50,6 @@ if ( ! class_exists( CptWooInt::class ) ) {
 		 * Class Constructor
 		 */
 		private function __construct() {
-
-			// $this->current_theme = wp_get_theme()->get( 'TextDomain' );
 
 			add_action( 'init', [ $this, 'language' ] );
 			add_action( 'plugins_loaded', [ $this, 'init' ], 100 );

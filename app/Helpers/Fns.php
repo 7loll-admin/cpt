@@ -28,6 +28,20 @@ class Fns {
 		return isset( $installed_plugins_list[ $plugin_file_path ] );
 	}
 
+	/**
+	 *  Verify nonce.
+	 *
+	 * @return bool
+	 */
+	public static function verify_nonce() {
+		$nonce     = isset( $_REQUEST[ cptwooint()->nonceId ] ) ? $_REQUEST[ cptwooint()->nonceId ] : null;
+		$nonceText = cptwooint()->nonceText;
+		if ( wp_verify_nonce( $nonce, $nonceText ) ) {
+			return true;
+		}
+
+		return false;
+	}
 
 	/**
 	 * @return false|string
