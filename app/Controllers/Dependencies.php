@@ -162,7 +162,6 @@ class Dependencies {
 		add_action( 'admin_enqueue_scripts', function () {
 			wp_enqueue_script( 'jquery' );
 			wp_enqueue_script( 'updates' );
-
 		} );
 
 		add_action( 'admin_footer', function () { ?>
@@ -172,7 +171,6 @@ class Dependencies {
                     align-items: center;
                     gap: 20px;
                 }
-
                 .cptwint-loader {
                     border: 4px solid #f3f3f3;
                     border-radius: 50%;
@@ -183,7 +181,6 @@ class Dependencies {
                     animation: spin 2s linear infinite;
                     margin-left: 5px;
                 }
-
                 /* Safari */
                 @-webkit-keyframes spin {
                     0% {
@@ -193,7 +190,6 @@ class Dependencies {
                         -webkit-transform: rotate(360deg);
                     }
                 }
-
                 @keyframes spin {
                     0% {
                         transform: rotate(0deg);
@@ -238,7 +234,6 @@ class Dependencies {
                                             console.log( pluginData, 'Plugin installed successfully!' );
                                             if ( pluginData.activateUrl ) {
                                                 that.html( 'Activation Prosses Running... <div class="cptwint-loader"></div>' );
-                                                //$(document).trigger('cptwooint_plugin_installed');
                                                 ajaxActive(that, plugin );
                                             }
                                         },
@@ -271,9 +266,8 @@ class Dependencies {
 		if ( ! Fns::verify_nonce() ) {
 			wp_send_json_error($return);
 		}
-		if (is_plugin_inactive( $_REQUEST['activation_file'] )) {
-			error_log( print_r( sanitize_text_field( $_REQUEST['activation_file'] ) , true ) . "\n\n", 3, __DIR__ . '/the_log.txt' );
-			activate_plugin( $_REQUEST['activation_file'] );
+		if ( ! empty( $_REQUEST['activation_file'] ) && is_plugin_inactive( $_REQUEST['activation_file'] )) {
+			activate_plugin( sanitize_text_field( $_REQUEST['activation_file'] ) );
 			$return['success'] = true;
 		}
         if( $return['success'] ){
