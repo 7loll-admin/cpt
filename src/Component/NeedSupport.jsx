@@ -27,7 +27,7 @@ function NeedSupport() {
 
             This will create a ticket. We will response form there.
 
-            Check our  <a href={`mailto:support@tinysolutions.freshdesk.com`}> Plugins List </a>
+            Check our  <a href={`https://profiles.wordpress.org/tinysolution/#content-plugins`} target={`_blank`}> Plugins List </a>
 
         </Layout>
 
