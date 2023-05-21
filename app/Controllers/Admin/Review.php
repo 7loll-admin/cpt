@@ -146,7 +146,8 @@ class Review {
 						<a href="<?php echo esc_url( $rated ); ?>" class="cptwooint-review-button cptwooint-review-button--cta cptwooint-review-button--outline"><span>😀 Already Rated!</span></a>
 						<a href="<?php echo esc_url( $remind_me ); ?>" class="cptwooint-review-button cptwooint-review-button--cta cptwooint-review-button--outline"><span>🔔 Remind Me Later</span></a>
 						<a href="<?php echo esc_url( $dont_disturb ); ?>" class="cptwooint-review-button cptwooint-review-button--cta cptwooint-review-button--error cptwooint-review-button--outline"><span>😐 No Thanks </span></a>
-					</div>
+                        <a href="<?php echo esc_url( 'https://www.wptinysolutions.com/contact' ); ?>" target="_blank" class="tsmlt-review-button tsmlt-review-button--cta tsmlt-review-button--error tsmlt-review-button--outline"><span> Contact our support </span></a>
+                    </div>
 				</div> 
 			</div>
 			<style> 

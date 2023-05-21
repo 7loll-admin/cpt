@@ -9,7 +9,7 @@ export const initialState = {
 	},
 	generalData:{
 		isLoading: true,
-		selectedMenu: localStorage.getItem("current_menu") || 'settings',
+		selectedMenu: localStorage.getItem("cptwi_current_menu") || 'settings',
 	},
 };
 

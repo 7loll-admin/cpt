@@ -7,10 +7,15 @@ import {
     updateOptins
 } from "../Utils/Data";
 
+import Settings from "./Settings";
+
+import NeedSupport from "./NeedSupport";
+
+import MainHeader from "./MainHeader";
+
 const { Sider } = Layout;
 
 import * as Types from "../Utils/actionType";
-
 
 import { useStateValue } from "../Utils/StateProvider";
 
@@ -39,7 +44,6 @@ function App() {
        console.log( 'handleUpdateOption' );
     }
 
-
     const handleSave = () => {
         switch ( stateValue.saveType ) {
             case Types.UPDATE_OPTIONS:
@@ -66,10 +70,11 @@ function App() {
                 height: 'calc( 100vh - 110px )',
             }}>
                 <Sider style={{ borderRadius: '5px' }}>
-                    Hello
+                    <MainHeader/>
                 </Sider>
                 <Layout className="layout" style={{ padding: '10px', overflowY: 'auto' }} >
-                        sefttings
+                    { 'settings' === stateValue.generalData.selectedMenu && <Settings/>  }
+                    { 'needsupport' === stateValue.generalData.selectedMenu && <NeedSupport/> }
                 </Layout>
             </Layout>
     );

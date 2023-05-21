@@ -138,7 +138,6 @@ class Dependencies {
 				$missingPlugins .= '<strong>' . esc_html( $plugin['name'] ) . '</strong>' . $sep;
 			}
 		}
-
 	}
 
 	/**
@@ -151,7 +150,6 @@ class Dependencies {
 
 		return isset( $installed_plugins_list[ $plugin_file_path ] );
 	}
-
 
 	/**
 	 * Undocumented function.
