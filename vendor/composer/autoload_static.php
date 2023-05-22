@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit6c472128954328041481b71ddab22f5a
+class ComposerStaticInit425fc09a2b3e08dfeb72eb16e4d2c69a
 {
     public static $prefixLengthsPsr4 = array (
         'T' => 
@@ -22,24 +22,14 @@ class ComposerStaticInit6c472128954328041481b71ddab22f5a
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
-        'TinySolutions\\cptwooint\\Controllers\\Admin\\AdminMenu' => __DIR__ . '/../..' . '/app/Controllers/Admin/AdminMenu.php',
-        'TinySolutions\\cptwooint\\Controllers\\Admin\\Api' => __DIR__ . '/../..' . '/app/Controllers/Admin/Api.php',
-        'TinySolutions\\cptwooint\\Controllers\\Admin\\Review' => __DIR__ . '/../..' . '/app/Controllers/Admin/Review.php',
-        'TinySolutions\\cptwooint\\Controllers\\AssetsController' => __DIR__ . '/../..' . '/app/Controllers/AssetsController.php',
-        'TinySolutions\\cptwooint\\Controllers\\Dependencies' => __DIR__ . '/../..' . '/app/Controllers/Dependencies.php',
-        'TinySolutions\\cptwooint\\Controllers\\Hooks\\ActionHooks' => __DIR__ . '/../..' . '/app/Controllers/Hooks/ActionHooks.php',
-        'TinySolutions\\cptwooint\\Controllers\\Hooks\\FilterHooks' => __DIR__ . '/../..' . '/app/Controllers/Hooks/FilterHooks.php',
-        'TinySolutions\\cptwooint\\Controllers\\Installation' => __DIR__ . '/../..' . '/app/Controllers/Installation.php',
-        'TinySolutions\\cptwooint\\Helpers\\Fns' => __DIR__ . '/../..' . '/app/Helpers/Fns.php',
-        'TinySolutions\\cptwooint\\Traits\\SingletonTrait' => __DIR__ . '/../..' . '/app/Traits/SingletonTrait.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit6c472128954328041481b71ddab22f5a::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit6c472128954328041481b71ddab22f5a::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit6c472128954328041481b71ddab22f5a::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit425fc09a2b3e08dfeb72eb16e4d2c69a::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit425fc09a2b3e08dfeb72eb16e4d2c69a::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit425fc09a2b3e08dfeb72eb16e4d2c69a::$classMap;
 
         }, null, ClassLoader::class);
     }
