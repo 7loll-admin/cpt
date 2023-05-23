@@ -19,7 +19,6 @@ use TinySolutions\cptwooint\Controllers\Hooks\FilterHooks;
 use TinySolutions\cptwooint\Controllers\Hooks\ActionHooks;
 use TinySolutions\cptwooint\Controllers\Admin\AdminMenu;
 use TinySolutions\cptwooint\Controllers\Admin\Api;
-use TinySolutions\cptwooint\Controllers\Admin\RegisterPostAndTax;
 use TinySolutions\cptwooint\Controllers\Admin\Review;
 
 if ( ! class_exists( CptWooInt::class ) ) {
