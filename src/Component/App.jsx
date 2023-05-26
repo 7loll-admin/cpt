@@ -4,6 +4,7 @@ import { Layout } from 'antd';
 
 import {
     getOptions,
+    getPostTypes,
     updateOptins
 } from "../Utils/Data";
 
@@ -36,6 +37,20 @@ function App() {
         console.log( 'getOptions' );
     }
 
+    const getThePostTypes = async () => {
+        const response = await getPostTypes();
+        const preparedData =  await JSON.parse( response.data );
+        await dispatch({
+            type: Types.GENERAL_DATA,
+            generalData: {
+                ...stateValue.generalData,
+                postTypes: preparedData,
+                isLoading: false,
+            }
+        });
+        console.log( 'getPostTypes' );
+    }
+
     const handleUpdateOption = async () => {
        const response = await updateOptins( stateValue.options );
        if( 200 === parseInt( response.status ) ){
@@ -59,6 +74,7 @@ function App() {
     
     useEffect(() => {
         getTheOptins();
+        getThePostTypes();
     }, [] );
 
     return (

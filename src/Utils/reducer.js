@@ -9,6 +9,7 @@ export const initialState = {
 	},
 	generalData:{
 		isLoading: true,
+		postTypes: {},
 		selectedMenu: localStorage.getItem("cptwi_current_menu") || 'settings',
 	},
 };

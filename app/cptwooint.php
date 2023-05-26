@@ -112,8 +112,8 @@ if ( ! class_exists( CptWooInt::class ) ) {
 			// Include File.
             AssetsController::instance();
             AdminMenu::instance();
-            FilterHooks::init_hooks();
-			ActionHooks::init_hooks();
+            FilterHooks::instance();
+			ActionHooks::instance();
             Api::instance();
 
 			do_action( 'cptwooint/after_loaded' );

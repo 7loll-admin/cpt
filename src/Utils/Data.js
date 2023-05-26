@@ -34,12 +34,16 @@ export const notifications = ( isTrue, text ) => {
 }
 
 export const updateOptins = async (  prams ) => {
-    const response = await Api.post(`/updateoptins`, prams );
+    const response = await Api.post(`/updateOptions`, prams );
     notifications( 200 === response.status && response.data.updated, response.data.message );
     return response;
 }
 
 export const getOptions = async () => {
-    return await Api.get(`/getoptions`);
+    return await Api.get(`/getOptions`);
+}
+
+export const getPostTypes = async () => {
+    return await Api.get(`/getPostTypes`);
 }
 

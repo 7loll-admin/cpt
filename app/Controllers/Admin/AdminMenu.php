@@ -37,8 +37,8 @@ class AdminMenu {
 			'WC Init',
 			'WC Init',
 			'manage_options',
-			'cptwooint/admin.php',
-			[$this, 'wp_media_page_callback'],
+			'cptwooint-admin',
+			[$this, 'page_callback'],
 			'dashicons-tickets',
 			6
 	    );
@@ -48,7 +48,7 @@ class AdminMenu {
      * Render submenu
      * @return void
      */
-    public function wp_media_page_callback() {
+    public function page_callback() {
         echo '<div class="wrap"><div id="cptwooint_root"></div></div>';
     }
 

@@ -5,19 +5,24 @@ import { useStateValue } from '../Utils/StateProvider';
 import Loader from '../Utils/Loader';
 
 import {
+    Col,
+    Row,
     Form,
+    Input,
     Layout,
     Button,
+    Select,
+    Divider
 } from 'antd';
 
 const { Content } = Layout;
 
 import * as Types from "../Utils/actionType";
+import RepeatedGroupFields from "./RepeatedGroupFields";
 
 function Settings() {
 
    const [stateValue, dispatch] = useStateValue();
-
 
     return (
         <Layout style={{ position: 'relative' }}>
@@ -37,7 +42,6 @@ function Settings() {
                     height: '100%'
                 }}
             >
-
                 { stateValue.options.isLoading ? <Loader/> :
                     <Content style={{
                         padding: '15px',
@@ -45,10 +49,9 @@ function Settings() {
                         borderRadius: '5px',
                         boxShadow: 'rgb(0 0 0 / 1%) 0px 0 20px',
                     }}>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        At atque commodi, cupiditate doloremque ducimus harum inventore iusto
-                        maxime nemo odio officia officiis porro provident
-                        quia quibusdam repellendus rerum veniam voluptas.
+                        <Divider orientation="left"></Divider>
+                        <RepeatedGroupFields/>
+                        <Divider orientation="left"></Divider>
                     </Content>
                 }
 

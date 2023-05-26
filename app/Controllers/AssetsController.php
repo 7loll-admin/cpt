@@ -44,14 +44,12 @@ class AssetsController
         add_action('admin_enqueue_scripts', [$this, 'backend_assets'], 1);
     }
 
-
     /**
      * Registers Admin scripts.
      *
      * @return void
      */
     public function backend_assets( $hook ) {
-
         $scripts = [
             [
                 'handle' => 'cptwooint-settings',
@@ -66,13 +64,10 @@ class AssetsController
             wp_register_script($script['handle'], $script['src'], $script['deps'], $this->version, $script['footer']);
         }
 
-        $current_screen =  get_current_screen() ;
-
-        if ( isset( $current_screen->id ) && 'toplevel_page_cptwooint/admin' === $current_screen->id ){
-
-            wp_enqueue_style('cptwooint-settings');
+	    global $pagenow;
+	    if ( 'admin.php' === $pagenow && 'cptwooint-admin' === $_GET['page'] ) {
+		    wp_enqueue_style('cptwooint-settings');
             wp_enqueue_script('cptwooint-settings');
-
             wp_localize_script(
                 'cptwooint-settings',
                 'cptwoointParams',
@@ -86,7 +81,6 @@ class AssetsController
             );
 
         }
-
     }
 
 

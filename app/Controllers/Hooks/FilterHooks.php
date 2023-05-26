@@ -9,6 +9,7 @@ namespace TinySolutions\cptwooint\Controllers\Hooks;
 
 use TinySolutions\cptwooint\Helpers\Fns;
 use TinySolutions\cptwooint\Controllers\Modal\CPTproductDataStore;
+use TinySolutions\cptwooint\Traits\SingletonTrait;
 
 defined( 'ABSPATH' ) || exit();
 
@@ -17,23 +18,32 @@ defined( 'ABSPATH' ) || exit();
  */
 class FilterHooks {
 	/**
+	 * Singleton
+	 */
+	use SingletonTrait;
+	/**
 	 * Init Hooks.
 	 *
 	 * @return void
 	 */
-	public static function init_hooks() {
+	private function __construct() {
         // Plugins Setting Page.
-        add_filter( 'plugin_action_links_' . CPTWI_BASENAME,  [ __CLASS__, 'plugins_setting_links' ] );
-		add_filter( 'woocommerce_data_stores', [ __CLASS__, 'cptwoo_data_stores' ] );
-		add_filter('woocommerce_product_get_price', [ __CLASS__, 'cptwoo_product_get_price' ] , 10, 2 );
+        add_filter( 'plugin_action_links_' . CPTWI_BASENAME,  [ $this, 'plugins_setting_links' ] );
+		add_filter( 'woocommerce_data_stores', [ $this, 'cptwoo_data_stores' ] );
+		add_filter('woocommerce_product_get_price', [ $this, 'cptwoo_product_get_price' ] , 10, 2 );
 		// Show meta value after post content THis will be shortcode
-		add_filter( 'the_content', [ __CLASS__, 'display_price' ]  );
+		add_filter( 'the_content', [ $this, 'display_price' ]  );
 	}
 
-	public static  function display_price( $content ) {
+	/***
+	 * @param $content
+	 *
+	 * @return mixed|string
+	 */
+	public function display_price( $content ) {
 		//TODO:: Post Type And Meta key Will Dynamic.
-		if ( get_post_type( get_the_ID() ) === 'book' ) {
-			$content .= get_post_meta( get_the_ID(), '_book_price', true );
+		if ( get_post_type( get_the_ID() ) === 'cptproduct' ) {
+			$content .= get_post_meta( get_the_ID(), 'price', true );
 		}
 		return $content ;
 	}
@@ -43,10 +53,10 @@ class FilterHooks {
 	 *
 	 * @return mixed
 	 */
-	public static  function cptwoo_product_get_price( $price, $product ) {
+	public function cptwoo_product_get_price( $price, $product ) {
 		//TODO:: Post Type And Meta key Will Dynamic.
-		if ( get_post_type( $product->get_id() ) === 'book' ) {
-			$price = get_post_meta( $product->get_id(), '_book_price', true );
+		if ( get_post_type( $product->get_id() ) === 'cptproduct' ) {
+			$price = get_post_meta( $product->get_id(), 'price', true );
 		}
 		return $price;
 	}
@@ -56,7 +66,7 @@ class FilterHooks {
 	 *
 	 * @return mixed
 	 */
-	public static function cptwoo_data_stores( $stores ) {
+	public function cptwoo_data_stores( $stores ) {
 		$stores['product'] = CPTproductDataStore::class;
 		return $stores;
 	}
@@ -66,7 +76,7 @@ class FilterHooks {
      *
      * @return array [array] plugin action link
      */
-    public static function plugins_setting_links( $links ) {
+    public function plugins_setting_links( $links ) {
         $links['cptwooint_settings'] = '<a href="' . admin_url( 'upload.php?page=cptwooint-settings' ) . '">' . esc_html__( 'Start Editing', 'cptwooint' ) . '</a>';
         /*
          * TODO:: Next Version
