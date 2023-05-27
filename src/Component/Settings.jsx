@@ -18,7 +18,7 @@ import {
 const { Content } = Layout;
 
 import * as Types from "../Utils/actionType";
-import RepeatedGroupFields from "./RepeatedGroupFields";
+import PostTypesAndMetaFields from "./PostTypesAndMetaFields";
 
 function Settings() {
 
@@ -50,7 +50,7 @@ function Settings() {
                         boxShadow: 'rgb(0 0 0 / 1%) 0px 0 20px',
                     }}>
                         <Divider orientation="left"></Divider>
-                        <RepeatedGroupFields/>
+                        <PostTypesAndMetaFields/>
                         <Divider orientation="left"></Divider>
                     </Content>
                 }

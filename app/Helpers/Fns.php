@@ -34,7 +34,7 @@ class Fns {
 	 * @return bool
 	 */
 	public static function verify_nonce() {
-		$nonce     = isset( $_REQUEST[ cptwooint()->nonceId ] ) ? $_REQUEST[ cptwooint()->nonceId ] : null;
+		$nonce = isset( $_REQUEST[ cptwooint()->nonceId ] ) ? $_REQUEST[ cptwooint()->nonceId ] : null;
 		if ( wp_verify_nonce( $nonce, cptwooint()->nonceId ) ) {
 			return true;
 		}
@@ -48,13 +48,11 @@ class Fns {
 	public static function get_options() {
 		$defaults = array(
 			'selected_post_types' => [
-				[
-					'postType' => 'selected',
-                    'metaValue' => 'selected',
-				]
+				'post'       => '',
 			]
 		);
 		$options  = get_option( 'cptwooint_settings' );
+
 		return wp_parse_args( $options, $defaults );
 	}
 

@@ -64,6 +64,8 @@ class Api {
 
 		$the_settings = get_option( 'cptwooint_settings', [] );
 
+		$the_settings['selected_post_types'] = isset( $parameters['selected_post_types'] ) ? $parameters['selected_post_types'] : [];
+
 		$options = update_option( 'cptwooint_settings', $the_settings );
 
 		$result['updated'] =  boolval( $options );
@@ -79,7 +81,15 @@ class Api {
 	 * @return false|string
 	 */
 	public function get_options() {
-		return wp_json_encode( Fns::get_options() );
+		$options = Fns::get_options();
+//
+//		$options['selected_post_types'] = [
+//			'post'       => 'metaValue',
+//		];
+
+		// postType
+
+		return wp_json_encode( $options );
 	}
 
 	/**
@@ -104,6 +114,7 @@ class Api {
 				'label' => $post_type->label,
 			];
 		}
+		//error_log( print_r( $post_type_array, true ) . "\n\n", 3, __DIR__ . '/the_log.txt' );
 		return wp_json_encode( $post_type_array );
 	}
 
