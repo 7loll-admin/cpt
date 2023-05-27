@@ -46,15 +46,49 @@ class Api {
 			'callback'            => [ $this, 'get_post_metas' ],
 			'permission_callback' => [ $this, 'login_permission_callback' ],
 		) );
+		register_rest_route( $this->namespace, $this->resource_name . '/clearCache', array(
+			'methods'             => 'POST',
+			'callback'            => [ $this, 'clear_data_cache' ],
+			'permission_callback' => [ $this, 'login_permission_callback' ],
+		) );
 	}
 
+	/**
+	 * @return true
+	 */
+	public function clear_data_cache() {
+		$result = [
+			'updated' => false,
+			'message' => esc_html__( 'Action Failed ', 'cptwooint-media-tools' )
+		];
+		$prefix = '_transient_cptwooint_';
+		// Get all transients with the specified prefix
+		global $wpdb;
+		$query = $wpdb->prepare(
+			"SELECT option_name FROM $wpdb->options WHERE option_name LIKE %s",
+			$wpdb->esc_like($prefix) . '%'
+		);
+		$transients = $wpdb->get_results($query);
+		// Delete transients
+		$delete = [];
+		foreach ($transients as $transient) {
+			$trans = str_replace('_transient_', '', $transient->option_name);
+			if( delete_transient( $trans ) ){
+				$delete[] = $trans;
+			}
+		}
+		$result['updated'] = count( $transients ) === count( $delete );
+		if( $result['updated'] ){
+			$result['message'] =  esc_html__( 'Cache Cleared.', 'boilerplate-media-tools' );
+		}
+		return $result;
+	}
 	/**
 	 * @return true
 	 */
 	public function login_permission_callback() {
 		return current_user_can( 'manage_options' );
 	}
-
 	/**
 	 * @return false|string
 	 */

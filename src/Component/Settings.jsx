@@ -51,24 +51,14 @@ function Settings() {
                 }
 
             </Form>
-            <Button
-                type="primary"
-                size="large"
-                 style={{
-                     position: 'fixed',
-                     bottom: '100px',
-                     right: '230px'
-                 }}
-                >
-                Clear Cache
-            </Button>
+
             <Button
                 type="primary"
                 size="large"
                 style={{
                     position: 'fixed',
                     bottom: '100px',
-                    right: '100px'
+                    right: '230px'
                 }}
                 onClick={ () => dispatch({
                     ...stateValue,

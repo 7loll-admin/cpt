@@ -52,3 +52,8 @@ export const getPostTypes = async () => {
     return await Api.get(`/getPostTypes`);
 }
 
+export const clearCache = async () => {
+    const response = await Api.post(`/clearCache`);
+    notifications( 200 === response.status && response.data.updated, response.data.message );
+    return response;
+}

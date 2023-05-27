@@ -7,6 +7,7 @@ import { SettingOutlined, ContactsOutlined } from '@ant-design/icons';
 import {useStateValue} from "../Utils/StateProvider";
 
 import * as Types from "../Utils/actionType";
+import {clearCache} from "../Utils/Data";
 
 const { Header } = Layout;
 
@@ -29,7 +30,6 @@ function MainHeader() {
                 margin: '10px',
                 background: 'rgba(255, 255, 255, 0.2)'
             }}>
-
             </div>
             <Menu
                 style={{
@@ -64,6 +64,21 @@ function MainHeader() {
                     localStorage.setItem( "cptwi_current_menu", key );
                 } }
             />
+            <Button
+                type="primary"
+                size="large"
+                onClick={ () => clearCache() }
+                style={{
+                    color: '#fff',
+                    position: 'absolute',
+                    bottom: '5px',
+                    left: '5px',
+                    right: '5px',
+                    borderRadius: 0,
+                }}
+            >
+                Clear Cache
+            </Button>
         </Header>
     );
 }
