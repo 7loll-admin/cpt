@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
-import {Form, Button, Input, Col, Select, Row, Typography, Alert} from 'antd';
+import React from 'react';
+import { Button, Col, Select, Row, Typography, Spin } from 'antd';
 import {useStateValue} from "../Utils/StateProvider";
 import * as Types from "../Utils/actionType";
-import {notifications} from "../Utils/Data";
+import {getPostMetas, notifications} from "../Utils/Data";
 
 const {
-    Title,
     Paragraph
 } = Typography;
 
@@ -51,7 +50,7 @@ const PostTypesAndMetaFields = () => {
         const isBookIncluded = keys.includes( value );
 
         if( isBookIncluded ){
-            notifications( false, 'Already Added');
+            notifications( false, 'Post type already selected');
             return;
         }
 
@@ -90,7 +89,6 @@ const PostTypesAndMetaFields = () => {
 
     };
 
-
     const handleAddField = () => {
         dispatch({
             type: Types.UPDATE_OPTIONS,
@@ -116,6 +114,29 @@ const PostTypesAndMetaFields = () => {
         });
     };
 
+    const getTheMeta = async ( postType, index, field ) => {
+        await dispatch({
+            type: Types.GENERAL_DATA,
+            //stateValue.generalData.postTypesMeta
+            generalData: {
+                ...stateValue.generalData,
+                postTypesMeta: [],
+                isLoading: true
+            }
+        });
+        const response = await getPostMetas( {
+            post_type : postType
+        });
+        await dispatch({
+            type: Types.GENERAL_DATA,
+            //stateValue.generalData.postTypesMeta
+            generalData: {
+                ...stateValue.generalData,
+                postTypesMeta: response,
+                isLoading: false
+            }
+        });
+    };
 
     return (
         <>
@@ -127,7 +148,6 @@ const PostTypesAndMetaFields = () => {
                         </Paragraph>
                         <Select
                             size="large"
-                            allowClear = {true}
                             placeholder='Post Type'
                             value={field[0].value}
                             style={{ width: '100%', height: '40px' }}
@@ -137,7 +157,7 @@ const PostTypesAndMetaFields = () => {
                     </Col>
                     <Col className="gutter-row" span={10}>
                         <Paragraph type="secondary" style={{ fontSize: '15px', marginBottom: '7px'}}>
-                            Meta Kye for Price
+                            Meta key for Price
                         </Paragraph>
                         <Select
                             showSearch
@@ -146,6 +166,20 @@ const PostTypesAndMetaFields = () => {
                             placeholder='Select Post Meta Key'
                             style={{ width: '100%', height: '40px', padding: 0 }}
                             value={field[1].value}
+                            notFoundContent={ stateValue.generalData.isLoading ?
+                                <Spin size="small"
+                                      style={{
+                                          position: 'relative',
+                                          display: 'inline-block',
+                                          opacity: 1,
+                                          left: '50%',
+                                          margin: '30px auto',
+                                          width: '50px',
+                                          transform: 'translateX( -50% )'
+                                        }}
+                                /> : null
+                            }
+                            onFocus={ () => getTheMeta( field[0].value, index, field ) }
                             onChange={ ( value ) => handleChangePostMeta( value, index, field ) }
                             options={stateValue.generalData.postTypesMeta}
                         />

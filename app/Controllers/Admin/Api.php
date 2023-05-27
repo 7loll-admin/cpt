@@ -41,6 +41,11 @@ class Api {
 			'callback'            => [ $this, 'get_post_types' ],
 			'permission_callback' => [ $this, 'login_permission_callback' ],
 		) );
+		register_rest_route( $this->namespace, $this->resource_name . '/getPostMetas', array(
+			'methods'             => 'GET',
+			'callback'            => [ $this, 'get_post_metas' ],
+			'permission_callback' => [ $this, 'login_permission_callback' ],
+		) );
 	}
 
 	/**
@@ -82,13 +87,6 @@ class Api {
 	 */
 	public function get_options() {
 		$options = Fns::get_options();
-//
-//		$options['selected_post_types'] = [
-//			'post'       => 'metaValue',
-//		];
-
-		// postType
-
 		return wp_json_encode( $options );
 	}
 
@@ -114,9 +112,58 @@ class Api {
 				'label' => $post_type->label,
 			];
 		}
-		//error_log( print_r( $post_type_array, true ) . "\n\n", 3, __DIR__ . '/the_log.txt' );
 		return wp_json_encode( $post_type_array );
 	}
+
+	/**
+	 * @return false|string
+	 */
+	public function get_post_metas( $request_data ) {
+
+		$parameters = $request_data->get_params();
+		$post_metas = [];
+		if( ! empty( $parameters['post_type'] ) ){
+			$post_type = $parameters['post_type'];
+			// Get all meta keys saved in posts of the specified post type
+			$transient_key        = 'cptwooint_meta_query_' . $post_type;
+			$post_metas      = get_transient( $transient_key );
+			if ( empty( $post_metas ) ) {
+				//delete_transient( $key );
+				global $wpdb;
+				$post_metas = $wpdb->get_results(
+					$wpdb->prepare(
+						"SELECT DISTINCT meta_key 
+				        FROM $wpdb->postmeta 
+				        INNER JOIN $wpdb->posts ON $wpdb->postmeta.post_id = $wpdb->posts.ID 
+				        WHERE $wpdb->posts.post_type = %s",
+						$post_type
+					)
+				);
+				set_transient( $transient_key, $post_metas, DAY_IN_SECONDS );
+			}
+
+		}
+
+		$the_metas = [];
+		if( ! empty( $post_metas ) ){
+			$remove_wp_default = [
+				'_edit_lock',
+				'_edit_last',
+				'_pingme',
+				'_encloseme'
+			];
+			foreach ( $post_metas as $result ) {
+				if( in_array( $result->meta_key, $remove_wp_default ) ) continue;
+				$the_metas[] = [
+					'value' => $result->meta_key,
+					'label' => $result->meta_key,
+				];
+			}
+		}
+
+		return wp_json_encode( $the_metas );
+	}
+
 
 }
 

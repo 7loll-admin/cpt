@@ -1,8 +1,8 @@
 import React from "react";
 
-import { Menu, Layout } from 'antd';
+import {Menu, Layout, Button} from 'antd';
 
-import { SettingOutlined, UnorderedListOutlined, EditOutlined, ContactsOutlined } from '@ant-design/icons';
+import { SettingOutlined, ContactsOutlined } from '@ant-design/icons';
 
 import {useStateValue} from "../Utils/StateProvider";
 
@@ -28,7 +28,9 @@ function MainHeader() {
                 height: '40px',
                 margin: '10px',
                 background: 'rgba(255, 255, 255, 0.2)'
-            }}/>
+            }}>
+
+            </div>
             <Menu
                 style={{
                     borderRadius: '0px',

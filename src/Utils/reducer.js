@@ -11,20 +11,7 @@ export const initialState = {
 	generalData:{
 		isLoading: true,
 		postTypes: [],
-		postTypesMeta: [
-			{
-				value: 'hello_main',
-				label: 'hello_main',
-			},
-			{
-				value: 'hello_main_2',
-				label: 'hello_main_2',
-			},
-			{
-				value: 'hello_main_3',
-				label: 'hello_main_3',
-			},
-		],
+		postTypesMeta: [],
 		selectedMenu: localStorage.getItem("cptwi_current_menu") || 'settings',
 	},
 };

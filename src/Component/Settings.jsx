@@ -5,13 +5,9 @@ import { useStateValue } from '../Utils/StateProvider';
 import Loader from '../Utils/Loader';
 
 import {
-    Col,
-    Row,
     Form,
-    Input,
     Layout,
     Button,
-    Select,
     Divider
 } from 'antd';
 
@@ -49,13 +45,23 @@ function Settings() {
                         borderRadius: '5px',
                         boxShadow: 'rgb(0 0 0 / 1%) 0px 0 20px',
                     }}>
-                        <Divider orientation="left"></Divider>
                         <PostTypesAndMetaFields/>
                         <Divider orientation="left"></Divider>
                     </Content>
                 }
 
             </Form>
+            <Button
+                type="primary"
+                size="large"
+                 style={{
+                     position: 'fixed',
+                     bottom: '100px',
+                     right: '230px'
+                 }}
+                >
+                Clear Cache
+            </Button>
             <Button
                 type="primary"
                 size="large"

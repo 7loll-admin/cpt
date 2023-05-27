@@ -33,7 +33,12 @@ export const notifications = ( isTrue, text ) => {
     }
 }
 
-export const updateOptins = async (  prams ) => {
+export const getPostMetas = async ( params ) => {
+    const result = await Api.get( `/getPostMetas`, { params } );
+    return JSON.parse( result.data );
+}
+
+export const updateOptins = async ( prams  ) => {
     const response = await Api.post(`/updateOptions`, prams );
     notifications( 200 === response.status && response.data.updated, response.data.message );
     return response;
