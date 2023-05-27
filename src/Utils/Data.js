@@ -21,7 +21,7 @@ const Api = Axios.create({
 export const notifications = ( isTrue, text ) => {
     const message = {
         message: text, //response.data.message,
-        placement: 'topRight',
+        placement: 'top',
         style: {
             marginTop: '10px',
         },

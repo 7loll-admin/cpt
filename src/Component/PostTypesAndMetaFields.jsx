@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import {Form, Button, Input, Col, Select, Row, Typography} from 'antd';
+import {Form, Button, Input, Col, Select, Row, Typography, Alert} from 'antd';
 import {useStateValue} from "../Utils/StateProvider";
 import * as Types from "../Utils/actionType";
+import {notifications} from "../Utils/Data";
 
 const {
     Title,
@@ -46,6 +47,13 @@ const PostTypesAndMetaFields = () => {
         let selectedPostTypes = stateValue.options.selected_post_types;
         const keys = Object.keys( selectedPostTypes );
         const oldKey = keys[index];
+
+        const isBookIncluded = keys.includes( value );
+
+        if( isBookIncluded ){
+            notifications( false, 'Already Added');
+            return;
+        }
 
         selectedPostTypes = Object.fromEntries(
             Object.entries( selectedPostTypes ).map(([key, val]) => {
