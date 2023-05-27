@@ -6,10 +6,11 @@ export const initialState = {
 	saveType: null,
 	options: {
 		isLoading: true,
+		selected_post_types: [],
 	},
 	generalData:{
 		isLoading: true,
-		postTypes: {},
+		postTypes: [],
 		selectedMenu: localStorage.getItem("cptwi_current_menu") || 'settings',
 	},
 };

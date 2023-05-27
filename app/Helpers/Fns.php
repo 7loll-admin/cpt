@@ -47,7 +47,12 @@ class Fns {
 	 */
 	public static function get_options() {
 		$defaults = array(
-
+			'selected_post_types' => [
+				[
+					'postType' => 'selected',
+                    'metaValue' => 'selected',
+				]
+			]
 		);
 		$options  = get_option( 'cptwooint_settings' );
 		return wp_parse_args( $options, $defaults );
