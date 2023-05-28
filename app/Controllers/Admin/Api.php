@@ -59,27 +59,11 @@ class Api {
 	public function clear_data_cache() {
 		$result = [
 			'updated' => false,
-			'message' => esc_html__( 'Action Failed ', 'cptwooint-media-tools' )
+			'message' => esc_html__( 'Action Failed ', 'cptwooint' )
 		];
-		$prefix = '_transient_cptwooint_';
-		// Get all transients with the specified prefix
-		global $wpdb;
-		$query = $wpdb->prepare(
-			"SELECT option_name FROM $wpdb->options WHERE option_name LIKE %s",
-			$wpdb->esc_like($prefix) . '%'
-		);
-		$transients = $wpdb->get_results($query);
-		// Delete transients
-		$delete = [];
-		foreach ($transients as $transient) {
-			$trans = str_replace('_transient_', '', $transient->option_name);
-			if( delete_transient( $trans ) ){
-				$delete[] = $trans;
-			}
-		}
-		$result['updated'] = count( $transients ) === count( $delete );
+		$result['updated'] = Fns::clear_data_cache();
 		if( $result['updated'] ){
-			$result['message'] =  esc_html__( 'Cache Cleared.', 'boilerplate-media-tools' );
+			$result['message'] =  esc_html__( 'Cache Cleared.', 'cptwooint' );
 		}
 		return $result;
 	}
@@ -96,7 +80,7 @@ class Api {
 
 		$result = [
 			'updated' => false,
-			'message' => esc_html__( 'Update failed. Maybe change not found. ', 'cptwooint-media-tools' )
+			'message' => esc_html__( 'Update failed. Maybe change not found. ', 'cptwooint' )
 		];
 
 		$parameters = $request_data->get_params();
@@ -110,9 +94,9 @@ class Api {
 		$result['updated'] =  boolval( $options );
 
 		if( $result['updated'] ){
-			$result['message'] =  esc_html__( 'Updated.', 'boilerplate-media-tools' );
+			$result['message'] =  esc_html__( 'Updated.', 'cptwooint' );
 		}
-
+		Fns::clear_data_cache();
 		return $result;
 	}
 
@@ -128,24 +112,35 @@ class Api {
 	 * @return false|string
 	 */
 	public function get_post_types() {
-		$cpt_args = [
-			'public' => true,
-			'_builtin' => false
-		];
-		$post_types = get_post_types( $cpt_args, 'objects' );
-		$post_type_array = [
-			[
-				'value' => 'post',
-				'label' => 'Posts',
-			]
-		];
-		foreach ( $post_types as $key => $post_type ) {
-			if( 'product' === $key ) continue;
-			$post_type_array[] = [
-				'value' => $post_type->name,
-				'label' => $post_type->label,
+		// Get all meta keys saved in posts of the specified post type
+		$transient_key        = 'cptwooint_registered_post_types';
+		$post_type_array      = get_transient( $transient_key );
+		if ( empty( $post_type_array ) ) {
+			$cpt_args = [
+				'public' => true,
+				'_builtin' => false
 			];
+			$post_types = get_post_types( $cpt_args, 'objects' );
+			$post_type_array = [
+				[
+					'value' => 'post',
+					'label' => 'Posts',
+				],
+				[
+					'value' => 'page',
+					'label' => 'Page',
+				]
+			];
+			foreach ( $post_types as $key => $post_type ) {
+				if( 'product' === $key ) continue;
+				$post_type_array[] = [
+					'value' => $post_type->name,
+					'label' => $post_type->label,
+				];
+			}
+			set_transient( $transient_key, $post_type_array, DAY_IN_SECONDS );
 		}
+
 		return wp_json_encode( $post_type_array );
 	}
 
@@ -181,10 +176,11 @@ class Api {
 		$the_metas = [];
 		if( ! empty( $post_metas ) ){
 			$remove_wp_default = [
-				'_edit_lock',
-				'_edit_last',
 				'_pingme',
-				'_encloseme'
+				'_edit_last',
+				'_encloseme',
+				'_edit_lock',
+				'_wp_page_template'
 			];
 			foreach ( $post_metas as $result ) {
 				if( in_array( $result->meta_key, $remove_wp_default ) ) continue;

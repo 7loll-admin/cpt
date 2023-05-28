@@ -7,6 +7,7 @@
 
 namespace TinySolutions\cptwooint\Controllers\Hooks;
 
+use TinySolutions\cptwooint\Helpers\Fns;
 use TinySolutions\cptwooint\Traits\SingletonTrait;
 
 defined( 'ABSPATH' ) || exit();
@@ -33,9 +34,38 @@ class ActionHooks {
 	 * @return void
 	 */
     public function the_shortcode() {
-        add_shortcode( 'wpdocs_the_shortcode', [ $this, 'the_add_to_cart_form' ] );
+        add_shortcode( 'cptwooint_add_to_cart', [ $this, 'the_add_to_cart_form' ] );
+        add_shortcode( 'cptwooint_display_price', [ $this, 'display_price' ] );
     }
 
+    /***
+     * @param $content
+     *
+     * @return mixed|string
+     */
+    public function display_price( $atts ) {
+	    $attributes = shortcode_atts( array(
+		    'title' => '',
+	    ), $atts );
+	    global $post;
+        $price = '';
+
+	    $current_post_type = get_post_type( get_the_ID() );
+	    $post_types = Fns::supported_post_types();
+
+	    if ( ! in_array( $current_post_type ,$post_types ) ) {
+		    return;
+	    }
+	    $meta_key = Fns::meta_key( $current_post_type );
+        if( $meta_key ){
+            $price = absint( get_post_meta( get_the_ID(), $meta_key, true ) );
+        }
+	    ob_start();
+            do_action('cptwooint_before_display_price');
+            echo $price;
+            do_action('cptwooint_after_display_price');
+        return ob_get_clean();
+    }
 	/**
 	 * @param $atts
 	 *
@@ -44,20 +74,24 @@ class ActionHooks {
 	public function the_add_to_cart_form( $atts ) {
 		$attributes = shortcode_atts( array(
 			'title' => false,
-			'limit' => 4,
 		), $atts );
-		global $post;
-		if ($post->post_type !== 'cptproduct') {
-            return;
-        }
+
+		$current_post_type = get_post_type( get_the_ID() );
+		$post_types = Fns::supported_post_types();
+
+		if ( ! in_array( $current_post_type ,$post_types ) ) {
+			return;
+		}
 		ob_start();
+		do_action('cptwooint_before_display_add_tocart_form');
 		?>
 		<form action="" method="post">
-			<input name="add-to-cart" type="hidden" value="<?php echo $post->ID ?>" />
+			<input name="add-to-cart" type="hidden" value="<?php echo get_the_ID() ?>" />
 			<input name="quantity" type="number" value="1" min="1"  />
 			<input name="submit" type="submit" value="Add to cart" />
 		</form>
 		<?php
+		do_action('cptwooint_after_display_add_tocart_form');
 		return ob_get_clean();
 	}
 

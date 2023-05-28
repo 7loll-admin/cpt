@@ -32,21 +32,10 @@ class FilterHooks {
 		add_filter( 'woocommerce_data_stores', [ $this, 'cptwoo_data_stores' ] );
 		add_filter('woocommerce_product_get_price', [ $this, 'cptwoo_product_get_price' ] , 10, 2 );
 		// Show meta value after post content THis will be shortcode
-		add_filter( 'the_content', [ $this, 'display_price' ]  );
+
 	}
 
-	/***
-	 * @param $content
-	 *
-	 * @return mixed|string
-	 */
-	public function display_price( $content ) {
-		//TODO:: Post Type And Meta key Will Dynamic.
-		if ( get_post_type( get_the_ID() ) === 'cptproduct' ) {
-			$content .= get_post_meta( get_the_ID(), 'price', true );
-		}
-		return $content ;
-	}
+
 	/**
 	 * @param $price
 	 * @param $product
@@ -54,9 +43,13 @@ class FilterHooks {
 	 * @return mixed
 	 */
 	public function cptwoo_product_get_price( $price, $product ) {
-		//TODO:: Post Type And Meta key Will Dynamic.
-		if ( get_post_type( $product->get_id() ) === 'cptproduct' ) {
-			$price = get_post_meta( $product->get_id(), 'price', true );
+		$current_post_type = get_post_type( $product->get_id() );
+		if( ! Fns::is_supported( $current_post_type ) ){
+			return ;
+		}
+		$meta_key = Fns::meta_key( $current_post_type );
+		if( $meta_key ){
+			$price = get_post_meta( $product->get_id(), $meta_key, true );
 		}
 		return $price;
 	}

@@ -73,8 +73,8 @@ function App() {
     }, [ stateValue.saveType ] );
     
     useEffect(() => {
-        getTheOptins();
         getThePostTypes();
+        getTheOptins();
     }, [] );
 
     return (
