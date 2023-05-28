@@ -200,7 +200,7 @@ const PostTypesAndMetaFields = () => {
                     <Button
                         style={{ height: '40px' }}
                         onClick={handleAddField}
-                    >Add Field</Button>
+                    >Add New</Button>
                 </Col>
             </Row>
         </>

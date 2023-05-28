@@ -21,6 +21,7 @@ class FilterHooks {
 	 * Singleton
 	 */
 	use SingletonTrait;
+
 	/**
 	 * Init Hooks.
 	 *
@@ -32,9 +33,22 @@ class FilterHooks {
 		add_filter( 'woocommerce_data_stores', [ $this, 'cptwoo_data_stores' ] );
 		add_filter('woocommerce_product_get_price', [ $this, 'cptwoo_product_get_price' ] , 10, 2 );
 		// Show meta value after post content THis will be shortcode
+		add_filter( 'the_content', [ $this, 'display_price_and_cart_button' ]  );
 
 	}
 
+	/***
+	 * @param $content
+	 *
+	 * @return mixed|string
+	 */
+	public function display_price_and_cart_button( $content ) {
+		$current_post_type = get_post_type( get_the_ID() );
+		if( ! Fns::is_supported( $current_post_type ) ){
+			return $content;
+		}
+		return $content . do_shortcode( '[cptwooint_display_price/]') . do_shortcode( '[cptwooint_add_to_cart/]') ;
+	}
 
 	/**
 	 * @param $price

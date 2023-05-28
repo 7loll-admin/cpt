@@ -57,22 +57,25 @@ class Api {
 	 * @return true
 	 */
 	public function clear_data_cache() {
-		$result = [
+		$result            = [
 			'updated' => false,
 			'message' => esc_html__( 'Action Failed ', 'cptwooint' )
 		];
 		$result['updated'] = Fns::clear_data_cache();
-		if( $result['updated'] ){
-			$result['message'] =  esc_html__( 'Cache Cleared.', 'cptwooint' );
+		if ( $result['updated'] ) {
+			$result['message'] = esc_html__( 'Cache Cleared.', 'cptwooint' );
 		}
+
 		return $result;
 	}
+
 	/**
 	 * @return true
 	 */
 	public function login_permission_callback() {
 		return current_user_can( 'manage_options' );
 	}
+
 	/**
 	 * @return false|string
 	 */
@@ -87,16 +90,24 @@ class Api {
 
 		$the_settings = get_option( 'cptwooint_settings', [] );
 
+		$the_settings['price_position']                 = isset( $parameters['price_position'] ) ? $parameters['price_position'] : '';
+		$the_settings['price_after_content_post_types'] = ! empty( $parameters['price_after_content_post_types'] ) ? $parameters['price_after_content_post_types'] : [];
+
+		$the_settings['cart_button_position']                 = isset( $parameters['cart_button_position'] ) ? $parameters['cart_button_position'] : '';
+		$the_settings['cart_button_after_content_post_types'] = ! empty( $parameters['cart_button_after_content_post_types'] ) ? $parameters['cart_button_after_content_post_types'] : [];
+
 		$the_settings['selected_post_types'] = isset( $parameters['selected_post_types'] ) ? $parameters['selected_post_types'] : [];
+
 
 		$options = update_option( 'cptwooint_settings', $the_settings );
 
-		$result['updated'] =  boolval( $options );
+		$result['updated'] = boolval( $options );
 
-		if( $result['updated'] ){
-			$result['message'] =  esc_html__( 'Updated.', 'cptwooint' );
+		if ( $result['updated'] ) {
+			$result['message'] = esc_html__( 'Updated.', 'cptwooint' );
 		}
 		Fns::clear_data_cache();
+
 		return $result;
 	}
 
@@ -105,6 +116,7 @@ class Api {
 	 */
 	public function get_options() {
 		$options = Fns::get_options();
+
 		return wp_json_encode( $options );
 	}
 
@@ -113,32 +125,29 @@ class Api {
 	 */
 	public function get_post_types() {
 		// Get all meta keys saved in posts of the specified post type
-		$transient_key        = 'cptwooint_registered_post_types';
-		$post_type_array      = get_transient( $transient_key );
-		if ( empty( $post_type_array ) ) {
-			$cpt_args = [
-				'public' => true,
-				'_builtin' => false
-			];
-			$post_types = get_post_types( $cpt_args, 'objects' );
-			$post_type_array = [
-				[
-					'value' => 'post',
-					'label' => 'Posts',
-				],
-				[
-					'value' => 'page',
-					'label' => 'Page',
-				]
-			];
-			foreach ( $post_types as $key => $post_type ) {
-				if( 'product' === $key ) continue;
-				$post_type_array[] = [
-					'value' => $post_type->name,
-					'label' => $post_type->label,
-				];
+		$cpt_args        = [
+			'public'   => true,
+			'_builtin' => false
+		];
+		$post_types      = get_post_types( $cpt_args, 'objects' );
+		$post_type_array = [
+			[
+				'value' => 'post',
+				'label' => 'Posts',
+			],
+			[
+				'value' => 'page',
+				'label' => 'Page',
+			]
+		];
+		foreach ( $post_types as $key => $post_type ) {
+			if ( 'product' === $key ) {
+				continue;
 			}
-			set_transient( $transient_key, $post_type_array, DAY_IN_SECONDS );
+			$post_type_array[] = [
+				'value' => $post_type->name,
+				'label' => $post_type->label,
+			];
 		}
 
 		return wp_json_encode( $post_type_array );
@@ -151,11 +160,11 @@ class Api {
 
 		$parameters = $request_data->get_params();
 		$post_metas = [];
-		if( ! empty( $parameters['post_type'] ) ){
+		if ( ! empty( $parameters['post_type'] ) ) {
 			$post_type = $parameters['post_type'];
 			// Get all meta keys saved in posts of the specified post type
-			$transient_key        = 'cptwooint_meta_query_' . $post_type;
-			$post_metas      = get_transient( $transient_key );
+			$transient_key = 'cptwooint_meta_query_' . $post_type;
+			$post_metas    = get_transient( $transient_key );
 			if ( empty( $post_metas ) ) {
 				//delete_transient( $key );
 				global $wpdb;
@@ -174,7 +183,7 @@ class Api {
 		}
 
 		$the_metas = [];
-		if( ! empty( $post_metas ) ){
+		if ( ! empty( $post_metas ) ) {
 			$remove_wp_default = [
 				'_pingme',
 				'_edit_last',
@@ -183,7 +192,9 @@ class Api {
 				'_wp_page_template'
 			];
 			foreach ( $post_metas as $result ) {
-				if( in_array( $result->meta_key, $remove_wp_default ) ) continue;
+				if ( in_array( $result->meta_key, $remove_wp_default ) ) {
+					continue;
+				}
 				$the_metas[] = [
 					'value' => $result->meta_key,
 					'label' => $result->meta_key,

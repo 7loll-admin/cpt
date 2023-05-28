@@ -47,15 +47,12 @@ class ActionHooks {
 	    $attributes = shortcode_atts( array(
 		    'title' => '',
 	    ), $atts );
-	    global $post;
         $price = '';
-
 	    $current_post_type = get_post_type( get_the_ID() );
-	    $post_types = Fns::supported_post_types();
-
-	    if ( ! in_array( $current_post_type ,$post_types ) ) {
-		    return;
+	    if( ! Fns::is_supported( $current_post_type ) ){
+		    return ;
 	    }
+
 	    $meta_key = Fns::meta_key( $current_post_type );
         if( $meta_key ){
             $price = absint( get_post_meta( get_the_ID(), $meta_key, true ) );
@@ -77,21 +74,21 @@ class ActionHooks {
 		), $atts );
 
 		$current_post_type = get_post_type( get_the_ID() );
-		$post_types = Fns::supported_post_types();
 
-		if ( ! in_array( $current_post_type ,$post_types ) ) {
-			return;
+		if( ! Fns::is_supported( $current_post_type ) ){
+			return ;
 		}
+
 		ob_start();
-		do_action('cptwooint_before_display_add_tocart_form');
-		?>
-		<form action="" method="post">
-			<input name="add-to-cart" type="hidden" value="<?php echo get_the_ID() ?>" />
-			<input name="quantity" type="number" value="1" min="1"  />
-			<input name="submit" type="submit" value="Add to cart" />
-		</form>
-		<?php
-		do_action('cptwooint_after_display_add_tocart_form');
+            do_action('cptwooint_before_display_add_tocart_form');
+            ?>
+                <form action="" method="post">
+                    <input name="add-to-cart" type="hidden" value="<?php echo get_the_ID() ?>" />
+                    <input name="quantity" type="number" value="1" min="1"  />
+                    <input name="submit" type="submit" value="Add to cart" />
+                </form>
+            <?php
+            do_action('cptwooint_after_display_add_tocart_form');
 		return ob_get_clean();
 	}
 
