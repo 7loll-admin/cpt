@@ -13,7 +13,7 @@ import {
     Typography
 } from 'antd';
 
-const { Title, Text } = Typography;
+const { Title, Text, Paragraph } = Typography;
 
 const { Content } = Layout;
 
@@ -106,10 +106,7 @@ function Settings() {
                                 </>
                             }
                             <Divider orientation="left"></Divider>
-                            <Text type="secondary" >
-                                ALso Can Use Shortcode
-                            </Text>
-
+                            <Paragraph  copyable={{ text: '[cptwooint_display_price/]' }} > Or you can use shortcode <Text type="secondary" code style={{ fontSize: '20px' }} > [cptwooint_display_price/] </Text> </Paragraph>
                         </Form.Item>
                          <Divider orientation="left"></Divider>
                         <Form.Item label={<Title level={5} style={{ margin:0, fontSize:'16px' }}> Show Cart Button </Title>} >
@@ -132,9 +129,7 @@ function Settings() {
                                 </>
                             }
                             <Divider orientation="left"></Divider>
-                            <Text type="secondary" >
-                                ALso Can Use Shortcode
-                            </Text>
+                            <Paragraph  copyable={{ text: '[cptwooint_add_to_cart/]' }} > Or you can use shortcode <Text type="secondary" code style={{ fontSize: '20px' }}> [cptwooint_add_to_cart/] </Text> </Paragraph>
 
                         </Form.Item>
                     </Content>
@@ -163,3 +158,8 @@ function Settings() {
 };
 
 export default Settings;
+
+
+
+
+

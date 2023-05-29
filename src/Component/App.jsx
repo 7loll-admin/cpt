@@ -10,6 +10,8 @@ import {
 
 import Settings from "./Settings";
 
+import Shortcode from "./Shortcode";
+
 import NeedSupport from "./NeedSupport";
 
 import MainHeader from "./MainHeader";
@@ -90,6 +92,7 @@ function App() {
                 </Sider>
                 <Layout className="layout" style={{ padding: '10px', overflowY: 'auto' }} >
                     { 'settings' === stateValue.generalData.selectedMenu && <Settings/> }
+                    { 'shortcode' === stateValue.generalData.selectedMenu && <Shortcode/> }
                     { 'needsupport' === stateValue.generalData.selectedMenu && <NeedSupport/> }
                 </Layout>
             </Layout>
