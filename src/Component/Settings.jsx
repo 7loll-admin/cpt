@@ -47,6 +47,12 @@ function Settings() {
         });
     };
 
+    const supportedPostType = () => {
+        return stateValue.generalData.postTypes.filter(( item ) =>{
+            return Object.keys( stateValue.options.selected_post_types ).includes( item.value );
+        });
+    };
+
     return (
         <Layout style={{ position: 'relative' }}>
             <Form
@@ -90,7 +96,7 @@ function Settings() {
                                 <>
                                     <Divider />
                                     <CheckboxGroup
-                                        options={stateValue.generalData.postTypes}
+                                        options={ supportedPostType() }
                                         value={stateValue.options.price_after_content_post_types}
                                         onChange={ ( list ) => onChangePostTypesList( list, 'price_after_content_post_types' ) }
                                     />
@@ -113,7 +119,7 @@ function Settings() {
                                 <>
                                     <Divider />
                                     <CheckboxGroup
-                                        options={stateValue.generalData.postTypes}
+                                        options={ supportedPostType() }
                                         value={stateValue.options.cart_button_after_content_post_types}
                                         onChange={ ( list ) => onChangePostTypesList( list, 'cart_button_after_content_post_types' ) }
                                     />

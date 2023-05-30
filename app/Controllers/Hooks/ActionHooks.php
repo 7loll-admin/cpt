@@ -52,7 +52,6 @@ class ActionHooks {
 	    if( ! Fns::is_supported( $current_post_type ) ){
 		    return ;
 	    }
-
 	    $meta_key = Fns::meta_key( $current_post_type );
         if( $meta_key ){
             $price = absint( get_post_meta( get_the_ID(), $meta_key, true ) );
@@ -72,13 +71,10 @@ class ActionHooks {
 		$attributes = shortcode_atts( array(
 			'title' => false,
 		), $atts );
-
 		$current_post_type = get_post_type( get_the_ID() );
-
 		if( ! Fns::is_supported( $current_post_type ) ){
 			return ;
 		}
-
 		ob_start();
             do_action('cptwooint_before_display_add_tocart_form');
             ?>

@@ -49,19 +49,24 @@ class FilterHooks {
 		}
 		$options = Fns::get_options();
 
-		if( ! empty( $options['price_position'] ) && 'price_after_content' === $options['price_position'] ){
-			$price_after_content = ! empty( $options['price_after_content_post_types'] ) && is_array( $options['price_after_content_post_types'] ) ? $options['price_after_content_post_types'] : [];
-			//error_log( print_r( $price_after_content, true ) . "\n\n", 3, __DIR__ . '/the_log.txt' );
-			if( in_array( $current_post_type, $price_after_content ) ){
-				$content .=  do_shortcode( '[cptwooint_display_price/]');
-			}
+		if(
+			! empty( $options['price_position'] ) &&
+		    ! empty( $options['price_after_content_post_types'] ) &&
+		    'price_after_content' === $options['price_position'] &&
+			is_array( $options['price_after_content_post_types'] ) &&
+			in_array( $current_post_type, $options['price_after_content_post_types'] )
+		){
+			$content .=  do_shortcode( '[cptwooint_price/]');
 		}
 
-		if( ! empty( $options['cart_button_position'] ) && 'cart_button_after_content' === $options['cart_button_position'] ){
-			$cart_after_content = ! empty( $options['cart_button_after_content_post_types'] ) && is_array( $options['cart_button_after_content_post_types'] ) ? $options['cart_button_after_content_post_types'] : [];
-			if( in_array( $current_post_type, $cart_after_content ) ){
-				$content .=  do_shortcode( '[cptwooint_add_to_cart/]');
-			}
+		if(
+			! empty( $options['cart_button_position'] ) &&
+			! empty( $options['cart_button_after_content_post_types'] ) &&
+			'cart_button_after_content' === $options['cart_button_position'] &&
+			is_array( $options['cart_button_after_content_post_types'] ) &&
+			in_array( $current_post_type, $options['cart_button_after_content_post_types'] )
+		){
+			$content .=  do_shortcode( '[cptwooint_cart_button/]');
 		}
 
 		return $content;
@@ -76,7 +81,7 @@ class FilterHooks {
 	public function cptwoo_product_get_price( $price, $product ) {
 		$current_post_type = get_post_type( $product->get_id() );
 		if( ! Fns::is_supported( $current_post_type ) ){
-			return ;
+			return $price;
 		}
 		$meta_key = Fns::meta_key( $current_post_type );
 		if( $meta_key ){
