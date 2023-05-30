@@ -34,8 +34,8 @@ class ActionHooks {
 	 * @return void
 	 */
     public function the_shortcode() {
-        add_shortcode( 'cptwooint_add_to_cart', [ $this, 'the_add_to_cart_form' ] );
-        add_shortcode( 'cptwooint_display_price', [ $this, 'display_price' ] );
+        add_shortcode( 'cptwooint_cart_button', [ $this, 'the_add_to_cart_form' ] );
+        add_shortcode( 'cptwooint_price', [ $this, 'display_price' ] );
     }
 
     /***

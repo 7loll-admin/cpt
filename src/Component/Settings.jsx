@@ -45,7 +45,6 @@ function Settings() {
                 [key]: list,
             }
         });
-        console.log( stateValue.options )
     };
 
     return (
@@ -93,12 +92,12 @@ function Settings() {
                                     <CheckboxGroup
                                         options={stateValue.generalData.postTypes}
                                         value={stateValue.options.price_after_content_post_types}
-                                        onChange={ (list) => onChangePostTypesList(list, 'price_after_content_post_types' ) }
+                                        onChange={ ( list ) => onChangePostTypesList( list, 'price_after_content_post_types' ) }
                                     />
                                 </>
                             }
                             <Divider orientation="left"></Divider>
-                            <Paragraph  copyable={{ text: '[cptwooint_display_price/]' }} > Or you can use shortcode <Text type="secondary" code style={{ fontSize: '20px' }} > [cptwooint_display_price/] </Text> </Paragraph>
+                            <Paragraph  copyable={{ text: '[cptwooint_price/]' }} > Or you can use shortcode <Text type="secondary" code style={{ fontSize: '20px' }} > [cptwooint_price/] </Text> </Paragraph>
                         </Form.Item>
                          <Divider orientation="left"></Divider>
                         <Form.Item label={<Title level={5} style={{ margin:0, fontSize:'16px' }}> Show Cart Button </Title>} >
@@ -116,12 +115,12 @@ function Settings() {
                                     <CheckboxGroup
                                         options={stateValue.generalData.postTypes}
                                         value={stateValue.options.cart_button_after_content_post_types}
-                                        onChange={ (list) => onChangePostTypesList( list, 'cart_button_after_content_post_types' ) }
+                                        onChange={ ( list ) => onChangePostTypesList( list, 'cart_button_after_content_post_types' ) }
                                     />
                                 </>
                             }
                             <Divider orientation="left"></Divider>
-                            <Paragraph  copyable={{ text: '[cptwooint_add_to_cart/]' }} > Or you can use shortcode <Text type="secondary" code style={{ fontSize: '20px' }}> [cptwooint_add_to_cart/] </Text> </Paragraph>
+                            <Paragraph  copyable={{ text: '[cptwooint_cart_button/]' }} > Or you can use shortcode <Text type="secondary" code style={{ fontSize: '20px' }}> [cptwooint_cart_button/] </Text> </Paragraph>
 
                         </Form.Item>
                     </Content>

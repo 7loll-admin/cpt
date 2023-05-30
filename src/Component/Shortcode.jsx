@@ -24,10 +24,10 @@ function Shortcode() {
                 }}
             >
             <Divider orientation="left"></Divider>
-            <Paragraph  copyable={{ text: '[cptwooint_display_price/]' }} > Shortcode for display price <Text type="secondary" code style={{ fontSize: '20px' }} > [cptwooint_display_price/] </Text> </Paragraph>
+            <Paragraph  copyable={{ text: '[cptwooint_price/]' }} > Shortcode for display price <Text type="secondary" code style={{ fontSize: '20px' }} > [cptwooint_price/] </Text> </Paragraph>
 
             <Divider orientation="left"></Divider>
-            <Paragraph  copyable={{ text: '[cptwooint_add_to_cart/]' }} > Shortcode for display cart button <Text type="secondary" code style={{ fontSize: '20px' }}> [cptwooint_add_to_cart/] </Text> </Paragraph>
+            <Paragraph  copyable={{ text: '[cptwooint_cart_button/]' }} > Shortcode for display cart button <Text type="secondary" code style={{ fontSize: '20px' }}> [cptwooint_cart_button/] </Text> </Paragraph>
 
         </Layout>
 
