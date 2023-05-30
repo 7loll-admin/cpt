@@ -65,7 +65,7 @@ class AssetsController
         }
 
 	    global $pagenow;
-	    if ( 'admin.php' === $pagenow && 'cptwooint-admin' === $_GET['page'] ) {
+	    if ( 'admin.php' === $pagenow && ! empty( $_GET['page'] ) && 'cptwooint-admin' === $_GET['page'] ) {
 		    wp_enqueue_style('cptwooint-settings');
             wp_enqueue_script('cptwooint-settings');
             wp_localize_script(

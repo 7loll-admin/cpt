@@ -92,7 +92,7 @@ if (
 		 */
 		mix
 			// Backend JS
-			.js("src/admin-settings.js", "assets/backend/")
+			.js("src/admin-settings.js", "assets/js/backend/")
 			.react();
 		/**
 		 * CSS

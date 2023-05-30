@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '7e8536525158c5d6e461c1dedd2da10fc30e0e65',
+    'reference' => '3427fa2ea866def4ea7b000dd8ae9ecd6af0d5a1',
     'name' => 'tinysolutions/cpt-woo-integration',
   ),
   'versions' => 
@@ -42,7 +42,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '7e8536525158c5d6e461c1dedd2da10fc30e0e65',
+      'reference' => '3427fa2ea866def4ea7b000dd8ae9ecd6af0d5a1',
     ),
   ),
 );

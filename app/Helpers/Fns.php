@@ -47,7 +47,9 @@ class Fns {
 	 */
 	public static function get_options() {
 		$defaults = array(
-			'selected_post_types' => []
+			'selected_post_types' => [
+				'post'       => '',
+			]
 		);
 		$options  = get_option( 'cptwooint_settings' );
 		return wp_parse_args( $options, $defaults );

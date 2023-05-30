@@ -214,6 +214,7 @@ class Dependencies {
                             },
                             success(response) {
                                 that.html( 'Activation Prosses Done' );
+                                location.reload();
                             },
                             error(e) {},
                         });

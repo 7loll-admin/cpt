@@ -4,7 +4,7 @@
  * Plugin Name:       Custom Post Type Woocommerce Integration
  * Plugin URI:        https://wordpress.org/support/plugin/cpt-woo-integration
  * Description:       Custom post type woocommerce integration
- * Version:           0.0.1
+ * Version:           1.0.0
  * Author:            Tiny Solutions
  * Author URI:        https://wptinysolutions.com/
  * Text Domain:       cptwooint
@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Define cptwooint Constant.
  */
 
-define( 'CPTWI_VERSION', '0.0.1' );
+define( 'CPTWI_VERSION', '1.0.0' );
 
 define( 'CPTWI_FILE', __FILE__ );
 
