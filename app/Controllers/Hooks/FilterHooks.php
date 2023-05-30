@@ -47,7 +47,24 @@ class FilterHooks {
 		if( ! Fns::is_supported( $current_post_type ) ){
 			return $content;
 		}
-		return $content . do_shortcode( '[cptwooint_display_price/]') . do_shortcode( '[cptwooint_add_to_cart/]') ;
+		$options = Fns::get_options();
+
+		if( ! empty( $options['price_position'] ) && 'price_after_content' === $options['price_position'] ){
+			$price_after_content = ! empty( $options['price_after_content_post_types'] ) && is_array( $options['price_after_content_post_types'] ) ? $options['price_after_content_post_types'] : [];
+			//error_log( print_r( $price_after_content, true ) . "\n\n", 3, __DIR__ . '/the_log.txt' );
+			if( in_array( $current_post_type, $price_after_content ) ){
+				$content .=  do_shortcode( '[cptwooint_display_price/]');
+			}
+		}
+
+		if( ! empty( $options['cart_button_position'] ) && 'cart_button_after_content' === $options['cart_button_position'] ){
+			$cart_after_content = ! empty( $options['cart_button_after_content_post_types'] ) && is_array( $options['cart_button_after_content_post_types'] ) ? $options['cart_button_after_content_post_types'] : [];
+			if( in_array( $current_post_type, $cart_after_content ) ){
+				$content .=  do_shortcode( '[cptwooint_add_to_cart/]');
+			}
+		}
+
+		return $content;
 	}
 
 	/**

@@ -34,8 +34,8 @@ class AdminMenu {
 	 */
 	public function register_sub_menu() {
 		add_menu_page(
-			esc_html__( 'CPT Init', 'cptwooint' ),
-			esc_html__( 'CPT Init', 'cptwooint' ),
+			esc_html__( 'WC Integration', 'cptwooint' ),
+			esc_html__( 'WC Integration', 'cptwooint' ),
 			'manage_options',
 			'cptwooint-admin',
 			[ $this, 'page_callback' ],

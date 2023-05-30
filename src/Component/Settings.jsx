@@ -35,13 +35,6 @@ function Settings() {
                 [e.target.name]: stateValue.options[e.target.name] !== e.target.value ? e.target.value : '',
             }
         });
-        // dispatch({
-        //     type: Types.UPDATE_OPTIONS,
-        //     options : {
-        //         ...stateValue.options,
-        //         [e.target.name]: stateValue.options[e.target.name] !== e.target.value ? e.target.value : '',
-        //     }
-        // });
     };
 
     const onChangePostTypesList = (list, key) => {
@@ -52,7 +45,7 @@ function Settings() {
                 [key]: list,
             }
         });
-
+        console.log( stateValue.options )
     };
 
     return (
@@ -71,8 +64,7 @@ function Settings() {
                 layout="horizontal"
                 style={{
                     maxWidth: 950,
-                    padding: '15px',
-                    height: '100%'
+                    padding: '15px'
                 }}
             >
                 { stateValue.options.isLoading ? <Loader/> :

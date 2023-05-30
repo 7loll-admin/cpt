@@ -90,14 +90,13 @@ class Api {
 
 		$the_settings = get_option( 'cptwooint_settings', [] );
 
-		$the_settings['price_position']                 = isset( $parameters['price_position'] ) ? $parameters['price_position'] : '';
-		$the_settings['price_after_content_post_types'] = ! empty( $parameters['price_after_content_post_types'] ) ? $parameters['price_after_content_post_types'] : [];
+		$the_settings['price_position']                 = $parameters['price_position'] ?? '';
+		$the_settings['price_after_content_post_types'] = $parameters['price_after_content_post_types'] ?? [];
 
-		$the_settings['cart_button_position']                 = isset( $parameters['cart_button_position'] ) ? $parameters['cart_button_position'] : '';
-		$the_settings['cart_button_after_content_post_types'] = ! empty( $parameters['cart_button_after_content_post_types'] ) ? $parameters['cart_button_after_content_post_types'] : [];
+		$the_settings['cart_button_position']                 = $parameters['cart_button_position'] ?? '';
+		$the_settings['cart_button_after_content_post_types'] = $parameters['cart_button_after_content_post_types'] ?? [];
 
-		$the_settings['selected_post_types'] = isset( $parameters['selected_post_types'] ) ? $parameters['selected_post_types'] : [];
-
+		$the_settings['selected_post_types'] = $parameters['selected_post_types'] ?? [];
 
 		$options = update_option( 'cptwooint_settings', $the_settings );
 
