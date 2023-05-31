@@ -7,6 +7,7 @@ export const initialState = {
 	options: {
 		isLoading: true,
 		selected_post_types: [],
+		style: [],
 	},
 	generalData:{
 		isLoading: true,

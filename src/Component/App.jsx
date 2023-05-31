@@ -12,6 +12,8 @@ import Settings from "./Settings";
 
 import Shortcode from "./Shortcode";
 
+import StyleSection from "./StyleSection";
+
 import NeedSupport from "./NeedSupport";
 
 import MainHeader from "./MainHeader";
@@ -87,11 +89,14 @@ function App() {
                 boxShadow: '0 4px 40px rgb(0 0 0 / 5%)',
                 height: 'calc( 100vh - 110px )',
             }}>
-                <Sider style={{ borderRadius: '5px' }}>
+                <Sider style={{
+                    borderRadius: '5px'
+                }}>
                     <MainHeader/>
                 </Sider>
                 <Layout className="layout" style={{ padding: '10px', overflowY: 'auto' }} >
                     { 'settings' === stateValue.generalData.selectedMenu && <Settings/> }
+                    { 'stylesection' === stateValue.generalData.selectedMenu && <StyleSection/> }
                     { 'shortcode' === stateValue.generalData.selectedMenu && <Shortcode/> }
                     { 'needsupport' === stateValue.generalData.selectedMenu && <NeedSupport/> }
                 </Layout>

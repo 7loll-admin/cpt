@@ -28,8 +28,24 @@ class ActionHooks {
 	 */
 	private function __construct() {
 		add_action( 'init', [ $this, 'the_shortcode' ] );
+		add_action('wp_head', [ $this, 'code_header' ] );
+
 	}
 
+	/**
+	 * @return void
+	 */
+    public function code_header(){ ?>
+        <style>
+            .cptwooint-cart-form {
+
+            }
+            .cptwooint-cart-form input{
+
+            }
+        </style>
+		<?php
+	}
 	/**
 	 * @return void
 	 */
@@ -78,7 +94,7 @@ class ActionHooks {
 		ob_start();
             do_action('cptwooint_before_display_add_tocart_form');
             ?>
-                <form action="<?php echo wc_get_cart_url();?>" method="post">
+                <form class="cptwooint-cart-form" action="<?php echo wc_get_cart_url();?>" method="post">
                     <input name="add-to-cart" type="hidden" value="<?php echo get_the_ID() ?>" />
                     <input name="quantity" type="number" value="1" min="1"  />
                     <input name="submit" type="submit" value="Add to cart" />

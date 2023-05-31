@@ -2,7 +2,7 @@ import React from "react";
 
 import {Menu, Layout, Button} from 'antd';
 
-import { SettingOutlined, ContactsOutlined, CodeOutlined } from '@ant-design/icons';
+import { SettingOutlined, ContactsOutlined, CodeSandboxOutlined, AntDesignOutlined } from '@ant-design/icons';
 
 import {useStateValue} from "../Utils/StateProvider";
 
@@ -48,11 +48,16 @@ function MainHeader() {
                     },
                     {
                         key: 'shortcode',
-                        label: 'Shortcode',
-                        icon: <CodeOutlined />,
+                        label: 'ShortCode',
+                        icon: <CodeSandboxOutlined />,
                         style: menuItemStyle
                     },
-
+                    {
+                        key: 'stylesection',
+                        label: 'Style Section',
+                        icon: <AntDesignOutlined />,
+                        style: menuItemStyle
+                    },
                     {
                         key: 'needsupport',
                         label: 'Need Support',
