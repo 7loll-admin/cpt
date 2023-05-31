@@ -42,7 +42,7 @@ function MainHeader() {
                 items={[
                     {
                         key: 'settings',
-                        label: 'Settings',
+                        label: 'Integration Settings',
                         icon: <SettingOutlined />,
                         style: menuItemStyle
                     },

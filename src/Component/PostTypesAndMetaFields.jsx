@@ -90,6 +90,11 @@ const PostTypesAndMetaFields = () => {
     };
 
     const handleAddField = () => {
+        const isIncluded = Object.keys( stateValue.options.selected_post_types ).includes( '' );
+        if( isIncluded ){
+            notifications( false, 'Already Added. Please fill-up then add new one');
+            return;
+        }
         dispatch({
             type: Types.UPDATE_OPTIONS,
             options: {
