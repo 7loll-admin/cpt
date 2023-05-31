@@ -138,9 +138,9 @@ function Settings() {
                 type="primary"
                 size="large"
                 style={{
-                    position: 'absolute',
-                    bottom: '15px',
-                    right: '15px'
+                    position: 'fixed',
+                    bottom: '100px',
+                    right: '100px'
                 }}
                 onClick={ () => dispatch({
                     ...stateValue,
