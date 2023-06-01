@@ -162,7 +162,7 @@ const PostTypesAndMetaFields = () => {
                     </Col>
                     <Col className="gutter-row" span={10}>
                         <Paragraph type="secondary" style={{ fontSize: '15px', marginBottom: '7px'}}>
-                            Meta key for Price
+                            Meta key for Sale Price
                         </Paragraph>
                         <Select
                             showSearch
