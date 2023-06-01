@@ -35,10 +35,16 @@ class ActionHooks {
 	/**
 	 * @return void
 	 */
-    public function code_header(){ ?>
+    public function code_header(){
+        $style = [
+                'width' => '80px'
+        ];
+
+        ?>
         <style>
             .cptwooint-cart-form {
-
+                display: flex;
+                gap: 5px;
             }
             .cptwooint-cart-form input{
 
