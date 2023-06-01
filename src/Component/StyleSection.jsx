@@ -47,6 +47,7 @@ function StyleSection() {
             { stateValue.options.isLoading ? <Loader/> :
                 <>
                     <Title  level={4} style={{ margin:0, fontSize:'16px' }} > Cart Button & Quantity Field Style </Title>
+
                     <Divider style={{ marginBottom: '10px' }} orientation="left"></Divider>
                     <Row gutter={16}>
                         <Col className="gutter-row" span={10}>
@@ -57,6 +58,7 @@ function StyleSection() {
                         </Col>
                     </Row>
                     <Divider style={{ marginBottom: '10px',marginTop: '10px', }} orientation="left"></Divider>
+
                     <Row gutter={16}>
                         <Col className="gutter-row" span={10}>
                             <Paragraph style={{ margin:0, fontSize:'16px' }} >Button Width: </Paragraph>
@@ -66,6 +68,7 @@ function StyleSection() {
                         </Col>
                     </Row>
                     <Divider style={{ marginBottom: '10px',marginTop: '10px', }} orientation="left"></Divider>
+
                     <Row gutter={16}>
                         <Col className="gutter-row" span={10}>
                             <Paragraph style={{ margin:0, fontSize:'16px' }} >Button And Quantity Height: </Paragraph>
@@ -75,50 +78,65 @@ function StyleSection() {
                         </Col>
                     </Row>
                     <Divider style={{ marginBottom: '10px',marginTop: '10px', }} orientation="left"></Divider>
+
+                    <Row gutter={16}>
+                        <Col className="gutter-row" span={10}>
+                            <Paragraph style={{ margin:0, fontSize:'16px' }} >Button And Quantity Gap: </Paragraph>
+                        </Col>
+                        <Col className="gutter-row" span={14}>
+                            <Paragraph style={{ margin:0, fontSize:'16px' }} ><InputNumber min={0} max={100} value={ stateValue.options.style?.fieldGap } onChange={ ( value ) => addStyle( value, 'fieldGap' ) } /> px</Paragraph>
+                        </Col>
+                    </Row>
+                    <Divider style={{ marginBottom: '10px',marginTop: '10px', }} orientation="left"></Divider>
+
                     <Row gutter={16}>
                         <Col className="gutter-row" span={10}>
                             <Paragraph style={{ margin:0, fontSize:'16px' }} >Button Text Color: </Paragraph>
                         </Col>
                         <Col className="gutter-row" span={14}>
                             <Paragraph style={{ margin:0, fontSize:'16px' }} >
-                                <ColorPicker format='hex' value={stateValue.options.style?.buttonColor} onChange={ ( colorHex ) => addStyle( colorHex.toHexString(), 'buttonColor' ) } /> {stateValue.options.style?.buttonColor}
+                                <ColorPicker format='hex' value={stateValue.options.style?.buttonColor} onChange={ ( colorHex ) => addStyle( colorHex.toHexString(), 'buttonColor' ) } /> Selected Color: {stateValue.options.style?.buttonColor}
                             </Paragraph>
                         </Col>
                     </Row>
                     <Divider style={{ marginBottom: '10px',marginTop: '10px', }} orientation="left"></Divider>
+
                     <Row gutter={16}>
                         <Col className="gutter-row" span={10}>
                             <Paragraph style={{ margin:0, fontSize:'16px' }} >Button Background Color: </Paragraph>
                         </Col>
                         <Col className="gutter-row" span={14}>
                             <Paragraph style={{ margin:0, fontSize:'16px' }} >
-                                <ColorPicker format='hex' value={stateValue.options.style?.buttonBgColor} onChange={ ( colorHex ) => addStyle( colorHex.toHexString(), 'buttonBgColor' ) } /> { stateValue.options.style?.buttonBgColor }
+                                <ColorPicker format='hex' value={stateValue.options.style?.buttonBgColor} onChange={ ( colorHex ) => addStyle( colorHex.toHexString(), 'buttonBgColor' ) } /> Selected Color: { stateValue.options.style?.buttonBgColor }
                             </Paragraph>
                         </Col>
                     </Row>
                     <Divider style={{ marginBottom: '10px',marginTop: '10px', }} orientation="left"></Divider>
+
                     <Row gutter={16}>
                         <Col className="gutter-row" span={10}>
                             <Paragraph style={{ margin:0, fontSize:'16px' }} >Button Text Hover Color: </Paragraph>
                         </Col>
                         <Col className="gutter-row" span={14}>
                             <Paragraph style={{ margin:0, fontSize:'16px' }} >
-                                <ColorPicker format='hex' value={stateValue.options.style?.buttonHoverColor} onChange={ ( colorHex ) => addStyle( colorHex.toHexString(), 'buttonHoverColor' ) } /> {stateValue.options.style?.buttonHoverColor}
+                                <ColorPicker format='hex' value={stateValue.options.style?.buttonHoverColor} onChange={ ( colorHex ) => addStyle( colorHex.toHexString(), 'buttonHoverColor' ) } /> Selected Color: {stateValue.options.style?.buttonHoverColor}
                             </Paragraph>
                         </Col>
                     </Row>
                     <Divider style={{ marginBottom: '10px',marginTop: '10px', }} orientation="left"></Divider>
+
                     <Row gutter={16}>
                         <Col className="gutter-row" span={10}>
                             <Paragraph style={{ margin:0, fontSize:'16px' }} >Button Background Hover Color: </Paragraph>
                         </Col>
                         <Col className="gutter-row" span={14}>
                             <Paragraph style={{ margin:0, fontSize:'16px' }} >
-                                <ColorPicker format='hex' value={stateValue.options.style?.buttonHoverBgColor} onChange={ ( colorHex ) => addStyle( colorHex.toHexString(), 'buttonHoverBgColor' ) } /> { stateValue.options.style?.buttonHoverBgColor }
+                                <ColorPicker format='hex' value={stateValue.options.style?.buttonHoverBgColor} onChange={ ( colorHex ) => addStyle( colorHex.toHexString(), 'buttonHoverBgColor' ) } /> Selected Color: { stateValue.options.style?.buttonHoverBgColor }
                             </Paragraph>
                         </Col>
                     </Row>
                     <Divider style={{ marginBottom: '10px',marginTop: '10px', }} orientation="left"></Divider>
+
                 </>
             }
             <Button

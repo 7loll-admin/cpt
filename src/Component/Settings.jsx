@@ -68,7 +68,7 @@ function Settings() {
                 wrapperCol={{ span: 24 }}
                 layout="horizontal"
                 style={{
-                    maxWidth: 950,
+                    maxWidth: 1000,
                     padding: '15px'
                 }}
             >
