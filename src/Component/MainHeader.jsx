@@ -18,7 +18,7 @@ function MainHeader() {
     const menuItemStyle = {
         borderRadius: 0,
         paddingInline: '10px',
-        fontSize:'18px'
+        fontSize:'15px'
     }
 
     return (
