@@ -106,7 +106,7 @@ class FilterHooks {
      * @return array [array] plugin action link
      */
     public function plugins_setting_links( $links ) {
-        $links['cptwooint_settings'] = '<a href="' . admin_url( 'upload.php?page=cptwooint-settings' ) . '">' . esc_html__( 'Start Editing', 'cptwooint' ) . '</a>';
+        $links['cptwooint_settings'] = '<a href="' . admin_url( 'admin.php?page=cptwooint-admin' ) . '">' . esc_html__( 'Start Editing', 'cptwooint' ) . '</a>';
         /*
          * TODO:: Next Version
          *
