@@ -18,6 +18,9 @@ Its compatibility with popular plugins and themes ensure flexibility for various
 The user-friendly interface allows easy customization and management of personalized products.
 By offering unique items that cater to individual preferences, this plugin enhances the e-commerce experience, fostering customer loyalty.
 
+
+[youtube https://www.youtube.com/watch?v=M-raVm2KRgs]
+
 == 🏆 Integrate Custom Post Type in WooCommerce ==
 
 To integrate a custom post type with WooCommerce and display the price and cart button using shortcodes, follow these steps:
