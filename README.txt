@@ -1,6 +1,6 @@
 === Custom Post Type Woocommerce Integration ===
 Contributors: tinysolution
-Tags: WooCommerce integration, Custom post types,
+Tags: WooCommerce integration, Custom post types, Pay For Post with WooCommerce
 Requires at least: 6.0
 Tested up to: 6.2
 Stable tag: 1.0.0
@@ -8,7 +8,7 @@ Requires PHP: 7.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-This plugin allows you to seamlessly add custom post type to WooCommerce.
+Simplify the process of selling access to pages, posts, and custom post types through WooCommerce with the "Custom Post Type Woocommerce Integration" with WooCommerce plugin.
 
 == Description ==
 
@@ -18,14 +18,15 @@ Its compatibility with popular plugins and themes ensure flexibility for various
 The user-friendly interface allows easy customization and management of personalized products.
 By offering unique items that cater to individual preferences, this plugin enhances the e-commerce experience, fostering customer loyalty.
 
-
 [youtube https://www.youtube.com/watch?v=M-raVm2KRgs]
+
+Quickly and easily sell access to pages, posts and custom post types through WooCommerce with Custom Post Type Woocommerce Integration.
 
 == 🏆 Integrate Custom Post Type in WooCommerce ==
 
 To integrate a custom post type with WooCommerce and display the price and cart button using shortcodes, follow these steps:
 
-Install and activate the "WC Integration" plugin in your WordPress site.
+Install and activate the "Custom Post Type Woocommerce Integration" plugin in your WordPress site.
 
 After activating the plugin, a new menu item called "WC Integration" will appear in the WordPress admin sidebar. Click on it to access the plugin settings.
 
@@ -54,23 +55,23 @@ By following these steps and using the provided shortcodes, you should be able t
 
 == 🏆 Frequently Asked Questions ==
 
-= Q: What is the "WC Integration" plugin? =
-A: The "WC Integration" plugin is a WordPress plugin that allows you to integrate a custom post type with WooCommerce. It provides a seamless way to incorporate custom post types into your WooCommerce shop, including displaying prices and adding cart functionality.
+= Q: What is the "Custom Post Type Woocommerce Integration" plugin? =
+A: The "Custom Post Type Woocommerce Integration" plugin is a WordPress plugin that allows you to integrate a custom post type with WooCommerce. It provides a seamless way to incorporate custom post types into your WooCommerce shop, including displaying prices and adding cart functionality.
 
-= Q: Where can I find the plugin settings for "WC Integration"? =
-A: After activating the "WC Integration" plugin, a new menu item called "WC Integration" will appear in the WordPress admin sidebar. Click on this menu item to access the plugin settings.
+= Q: Where can I find the plugin settings for "Custom Post Type Woocommerce Integration"? =
+A: After activating the "Custom Post Type Woocommerce Integration" plugin, a new menu item called "Custom Post Type Woocommerce Integration" will appear in the WordPress admin sidebar. Click on this menu item to access the plugin settings.
 
-= Q: How do I integrate a custom post type with WooCommerce using "WC Integration"? =
-A: To integrate a custom post type with WooCommerce using the "WC Integration" plugin, follow these steps:
+= Q: How do I integrate a custom post type with WooCommerce using "Custom Post Type Woocommerce Integration"? =
+A: To integrate a custom post type with WooCommerce using the "Custom Post Type Woocommerce Integration" plugin, follow these steps:
 
-Access the plugin settings by clicking on "WC Integration" in the WordPress admin sidebar.
+Access the plugin settings by clicking on "Custom Post Type Woocommerce Integration" in the WordPress admin sidebar.
 In the plugin settings page, locate the "Select Post type & Price Meta key" option.
 Choose the desired custom post type from the dropdown list.
 Select the appropriate meta key related to the price for the selected custom post type.
 Save the settings.
 
-= Q: What are the shortcodes provided by the "WC Integration" plugin? =
-A: The "WC Integration" plugin provides the following shortcodes:
+= Q: What are the shortcodes provided by the "Custom Post Type Woocommerce Integration" plugin? =
+A: The "Custom Post Type Woocommerce Integration" plugin provides the following shortcodes:
 
 [cptwooint_price/]: Displays the price for the custom post type.
 [cptwooint_cart_button/]: Displays the cart button for the custom post type.
@@ -79,10 +80,10 @@ A: The "WC Integration" plugin provides the following shortcodes:
 A: You can use the shortcodes [cptwooint_price/] and [cptwooint_cart_button/] in any appropriate location within your WordPress site, such as pages, posts, or templates. Simply add the shortcodes to the desired location, and they will display the price and cart button for your custom post type.
 
 = Q: Can I integrate multiple custom post types with WooCommerce using this plugin? =
-A: Yes, the "WC Integration" plugin allows you to integrate multiple custom post types with WooCommerce. You can repeat the integration process for each custom post type by selecting the appropriate post type and price meta key in the plugin settings.
+A: Yes, the "Custom Post Type Woocommerce Integration" plugin allows you to integrate multiple custom post types with WooCommerce. You can repeat the integration process for each custom post type by selecting the appropriate post type and price meta key in the plugin settings.
 
-= Q: Is the "WC Integration" plugin compatible with the latest version of WooCommerce? =
-A: The compatibility of the "WC Integration" plugin with the latest version of WooCommerce may vary. It is always recommended to keep both the plugin and WooCommerce updated to ensure compatibility and avoid any potential issues.
+= Q: Is the "Custom Post Type Woocommerce Integration" plugin compatible with the latest version of WooCommerce? =
+A: The compatibility of the "Custom Post Type Woocommerce Integration" plugin with the latest version of WooCommerce may vary. It is always recommended to keep both the plugin and WooCommerce updated to ensure compatibility and avoid any potential issues.
 
 
 == Changelog ==
