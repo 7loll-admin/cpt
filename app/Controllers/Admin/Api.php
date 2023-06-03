@@ -98,6 +98,9 @@ class Api {
 
 		$the_settings['selected_post_types'] = $parameters['selected_post_types'] ?? [];
 
+		$the_settings['redirect_to_cart_page'] = $parameters['redirect_to_cart_page'] ?? null;
+
+
 		$the_settings['style'] = $parameters['style'] ?? [];
 
 		$options = update_option( 'cptwooint_settings', $the_settings );

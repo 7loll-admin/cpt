@@ -169,10 +169,12 @@ class ActionHooks {
 		if ( ! Fns::is_supported( $current_post_type ) ) {
 			return;
 		}
+		$options = Fns::get_options();
+        $cart_url = $options['redirect_to_cart_page'] ? wc_get_cart_url() : '';
 		ob_start();
 		do_action( 'cptwooint_before_display_add_tocart_form' );
 		?>
-        <form class="cptwooint-cart-form" action="<?php echo wc_get_cart_url(); ?>" method="post">
+        <form class="cptwooint-cart-form" action="<?php echo esc_url( $cart_url ); ?>" method="post">
             <input name="add-to-cart" type="hidden" value="<?php echo get_the_ID() ?>"/>
             <input name="quantity" type="number" value="1" min="1"/>
             <input name="submit" type="submit" value="Add to cart"/>

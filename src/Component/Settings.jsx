@@ -27,7 +27,7 @@ function Settings() {
 
    const [stateValue, dispatch] = useStateValue();
 
-    const priceCartPosition = (e) => {
+    const checkBoxOption = (e) => {
         dispatch({
             type: Types.UPDATE_OPTIONS,
             options : {
@@ -85,7 +85,7 @@ function Settings() {
                         <Divider orientation="left"></Divider>
                         <Form.Item label={<Title level={5} style={{ margin:0, fontSize:'16px' }}> Show Price </Title>} >
                             <Checkbox
-                                onChange={priceCartPosition}
+                                onChange={checkBoxOption}
                                 name={`price_position`}
                                 value={`price_after_content`}
                                 checked={ 'price_after_content' === stateValue.options.price_position }>
@@ -108,7 +108,7 @@ function Settings() {
                          <Divider orientation="left"></Divider>
                         <Form.Item label={<Title level={5} style={{ margin:0, fontSize:'16px' }}> Show Cart Button </Title>} >
                             <Checkbox
-                                onChange={priceCartPosition}
+                                onChange={checkBoxOption}
                                 name={`cart_button_position`}
                                 value={`cart_button_after_content`}
                                 checked={ 'cart_button_after_content' === stateValue.options.cart_button_position }>
@@ -127,6 +127,14 @@ function Settings() {
                             }
                             <Divider orientation="left"></Divider>
                             <Paragraph  copyable={{ text: '[cptwooint_cart_button/]' }} > Or you can use shortcode <Text type="secondary" code style={{ fontSize: '20px' }}> [cptwooint_cart_button/] </Text> </Paragraph>
+                            <Divider orientation="left"></Divider>
+                            <Checkbox
+                                onChange={checkBoxOption}
+                                name={`redirect_to_cart_page`}
+                                value={`redirect_to_cart_page`}
+                                checked={ 'redirect_to_cart_page' === stateValue.options.redirect_to_cart_page }>
+                                Redirect to cart page after adding items to cart.
+                            </Checkbox>
 
                         </Form.Item>
                     </Content>

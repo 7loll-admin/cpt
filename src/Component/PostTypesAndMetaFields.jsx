@@ -43,7 +43,11 @@ const PostTypesAndMetaFields = () => {
     const fields = selectedType.length ? getFields : defauylFields;
 
     const handleChangePostType = ( value, index, field ) => {
-        let selectedPostTypes = stateValue.options.selected_post_types;
+        let selectedPostTypes = stateValue.options.selected_post_types.length ? stateValue.options.selected_post_types : {
+             ...stateValue.options.selected_post_types,
+             "" : ''
+         };
+
         const keys = Object.keys( selectedPostTypes );
         const oldKey = keys[index];
 
