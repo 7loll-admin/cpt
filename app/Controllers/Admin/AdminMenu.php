@@ -39,7 +39,7 @@ class AdminMenu {
 			'manage_options',
 			'cptwooint-admin',
 			[ $this, 'page_callback' ],
-			'dashicons-tickets',
+			'dashicons-cart',
 			6
 		);
 	}
