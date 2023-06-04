@@ -40,7 +40,7 @@ class AdminMenu {
 			'cptwooint-admin',
 			[ $this, 'page_callback' ],
 			'dashicons-cart',
-			6
+			'55.6'
 		);
 	}
 
