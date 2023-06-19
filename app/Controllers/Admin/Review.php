@@ -549,8 +549,8 @@ class Review {
                     var given = localRetrieveData("feedback-given");
 
                     if ('given' === given) {
-                        window.location.href = href;
-                        return;
+                        // window.location.href = href;
+                        // return;
                     }
                     $('#deactivation-dialog-<?php echo CPTWI_TEXT_DOMAIN; ?>').dialog({
                         modal: true,
