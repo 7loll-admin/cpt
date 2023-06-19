@@ -20,7 +20,7 @@ use TinySolutions\cptwooint\Controllers\Hooks\ActionHooks;
 use TinySolutions\cptwooint\Controllers\Admin\AdminMenu;
 use TinySolutions\cptwooint\Controllers\Admin\Api;
 
-//use TinySolutions\cptwooint\Controllers\Admin\Review;
+use TinySolutions\cptwooint\Controllers\Admin\Review;
 
 if ( ! class_exists( CptWooInt::class ) ) {
 	/**
@@ -109,7 +109,7 @@ if ( ! class_exists( CptWooInt::class ) ) {
 
 			do_action( 'cptwooint/before_loaded' );
 
-//            Review::instance();
+            Review::instance();
 
 			// Include File.
             AssetsController::instance();
