@@ -32,6 +32,8 @@ define( 'CPTWI_URL', plugins_url( '', CPTWI_FILE ) );
 
 define( 'CPTWI_ABSPATH', dirname( CPTWI_FILE ) );
 
+define( 'CPTWI_TEXT_DOMAIN', 'cptwooint' );
+
 /**
  * App Init.
  */
