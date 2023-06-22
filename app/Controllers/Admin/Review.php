@@ -35,7 +35,7 @@ class Review {
 	 *
 	 * @return void
 	 */
-	public static function cptwooint_check_installation_time() {
+	public function cptwooint_check_installation_time() {
 
 		// Added Lines Start
 		$nobug = get_option( 'cptwooint_spare_me' );
@@ -62,7 +62,7 @@ class Review {
 			return;
 		}
 
-		add_action( 'admin_notices', [ __CLASS__, 'cptwooint_display_admin_notice' ] );
+		add_action( 'admin_notices', [ $this, 'cptwooint_display_admin_notice' ] );
 
 	}
 
@@ -71,7 +71,7 @@ class Review {
 	 *
 	 * @return void
 	 */
-	public static function cptwooint_spare_me() {
+	public  function cptwooint_spare_me() {
 
 		if ( ! isset( $_REQUEST['_wpnonce'] ) || ! wp_verify_nonce( $_REQUEST['_wpnonce'], 'cptwooint_notice_nonce' ) ) {
 			return;
@@ -100,7 +100,7 @@ class Review {
 		}
 	}
 
-	protected static function cptwooint_current_admin_url() {
+	protected  function cptwooint_current_admin_url() {
 		$uri = isset( $_SERVER['REQUEST_URI'] ) ? esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
 		$uri = preg_replace( '|^.*/wp-admin/|i', '', $uri );
 
@@ -123,7 +123,7 @@ class Review {
 	/**
 	 * Display Admin Notice, asking for a review
 	 **/
-	public static function cptwooint_display_admin_notice() {
+	public  function cptwooint_display_admin_notice() {
 		// WordPress global variable
 		global $pagenow;
 		$exclude = [
@@ -149,9 +149,9 @@ class Review {
 
 			$args = [ '_wpnonce' => wp_create_nonce( 'cptwooint_notice_nonce' ) ];
 
-			$dont_disturb = add_query_arg( $args + [ 'cptwooint_spare_me' => '1' ], self::cptwooint_current_admin_url() );
-			$remind_me    = add_query_arg( $args + [ 'cptwooint_remind_me' => '1' ], self::cptwooint_current_admin_url() );
-			$rated        = add_query_arg( $args + [ 'cptwooint_rated' => '1' ], self::cptwooint_current_admin_url() );
+			$dont_disturb = add_query_arg( $args + [ 'cptwooint_spare_me' => '1' ], $this->cptwooint_current_admin_url() );
+			$remind_me    = add_query_arg( $args + [ 'cptwooint_remind_me' => '1' ], $this->cptwooint_current_admin_url() );
+			$rated        = add_query_arg( $args + [ 'cptwooint_rated' => '1' ], $this->cptwooint_current_admin_url() );
 			$reviewurl    = 'https://wordpress.org/support/plugin/media-library-tools/reviews/?filter=5#new-post';
 			?>
             <div class="notice cptwooint-review-notice cptwooint-review-notice--extended">
@@ -318,8 +318,8 @@ class Review {
 			return;
 		}
 
-		self::dialog_box_style();
-		self::deactivation_scripts();
+		$this->dialog_box_style();
+		$this->deactivation_scripts();
 		?>
         <div id="deactivation-dialog-<?php echo $this->textdomain; ?>" title="Quick Feedback">
             <!-- Modal content -->
