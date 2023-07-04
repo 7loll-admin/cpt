@@ -199,7 +199,13 @@ class Dependencies {
             </style>
             <script type="text/javascript">
                 (function ($) {
+
                     function ajaxActive( that, plugin ){
+
+                        if( that.attr("disabled") ){
+                            return;
+                        }
+
                         $.ajax({
                             url: '<?php echo admin_url( 'admin-ajax.php' ); ?>',
                             data: {
@@ -214,7 +220,8 @@ class Dependencies {
                             },
                             success(response) {
                                 that.html( 'Activation Prosses Done' );
-                                location.reload();
+                                that.removeClass('plugin-install-by-ajax');
+                                that.attr('disabled','disabled');
                             },
                             error(e) {},
                         });
@@ -224,6 +231,9 @@ class Dependencies {
                             .on('click', function (e) {
                                 e.preventDefault();
                                 var that = $(this);
+                                if( that.attr("disabled") ){
+                                    return;
+                                }
                                 var plugin =  $(this).data('plugin') ;
                                 console.log( plugin.file_name )
                                 if ( plugin.slug ) {
