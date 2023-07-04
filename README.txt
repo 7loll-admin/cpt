@@ -1,4 +1,4 @@
-=== Custom Post Type Woocommerce Integration ===
+=== Integrate custom post type with woocommerce - Custom Post Type Woocommerce Integration  ===
 Contributors: tinysolution
 Tags: WooCommerce integration, Custom post types, Pay For Post with WooCommerce
 Requires at least: 6.0

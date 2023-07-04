@@ -2,8 +2,8 @@
 /**
  * @wordpress-plugin
  * Plugin Name:       Custom Post Type Woocommerce Integration
- * Plugin URI:        https://wordpress.org/support/plugin/cpt-woo-integration
- * Description:       Custom post type woocommerce integration
+ * Plugin URI:        https://wordpress.org/plugins/cpt-woo-integration
+ * Description:       Integrate custom post type with woocommerce. Sell Any Kind Of post
  * Version:           1.0.0
  * Author:            Tiny Solutions
  * Author URI:        https://wptinysolutions.com/
@@ -36,3 +36,5 @@ define( 'CPTWI_ABSPATH', dirname( CPTWI_FILE ) );
  * App Init.
  */
 require_once 'app/cptwooint.php';
+
+// Inspiration Url https://wordpress.org/support/topic/integrate-custom-post-type-with-woocommerce/
