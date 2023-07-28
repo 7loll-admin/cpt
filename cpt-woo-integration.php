@@ -2,11 +2,11 @@
 /**
  * @wordpress-plugin
  * Plugin Name:       Custom Post Type Woocommerce Integration
- * Plugin URI:        https://wordpress.org/support/plugin/cpt-woo-integration
+ * Plugin URI:        https://wordpress.org/plugins/cpt-woo-integration
  * Description:       Custom post type woocommerce integration
  * Version:           1.0.0
  * Author:            Tiny Solutions
- * Author URI:        https://wptinysolutions.com/
+ * Author URI:        https://profiles.wordpress.org/tinysolution
  * Text Domain:       cptwooint
  * Domain Path:       /languages
  *
