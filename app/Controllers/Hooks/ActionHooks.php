@@ -39,14 +39,14 @@ class ActionHooks {
 		$options = Fns::get_options();
 		$style   = $options['style'] ?? [];
 
-		$field_gap             = $style['fieldGap'] ?? '';
-		$field_width           = $style['fieldWidth'] ?? '';
-		$field_height          = $style['fieldHeight'] ?? '';
-		$button_width          = $style['buttonWidth'] ?? '';
-		$button_color          = $style['buttonColor'] ?? '';
-		$button_bg_color       = $style['buttonBgColor'] ?? '';
-		$button_hover_color    = $style['buttonHoverColor'] ?? '';
-		$button_hover_hg_color = $style['buttonHoverBgColor'] ?? '';
+		$field_gap             = $style['fieldGap'] ?? null;
+		$field_width           = $style['fieldWidth'] ?? null;
+		$field_height          = $style['fieldHeight'] ?? null;
+		$button_width          = $style['buttonWidth'] ?? null;
+		$button_color          = $style['buttonColor'] ?? null;
+		$button_bg_color       = $style['buttonBgColor'] ?? null;
+		$button_hover_color    = $style['buttonHoverColor'] ?? null;
+		$button_hover_hg_color = $style['buttonHoverBgColor'] ?? null;
 
 		ob_start();
 		if ( $field_width ) { ?>
@@ -65,19 +65,19 @@ class ActionHooks {
             height: <?php echo absint( $field_height ); ?>px;
 		<?php } ?>
 		<?php if ( $button_color ) { ?>
-            color: <?php echo sanitize_text_field( $button_color ); ?>;
+            color: <?php echo esc_html( $button_color ); ?>;
 		<?php }
 		if ( $button_bg_color ) { ?>
-            background-color: <?php echo sanitize_text_field( $button_bg_color ); ?>;
+            background-color: <?php echo esc_html( $button_bg_color ); ?>;
 		<?php }
 		$button_style = ob_get_clean();
 
 		ob_start(); ?>
 		<?php if ( $button_hover_color ) { ?>
-            color: <?php echo sanitize_text_field( $button_hover_color ); ?>;
+            color: <?php echo esc_html( $button_hover_color ); ?>;
 		<?php }
 		if ( $button_hover_hg_color ) { ?>
-            background-color: <?php echo sanitize_text_field( $button_hover_hg_color ); ?>;
+            background-color: <?php echo esc_html( $button_hover_hg_color ); ?>;
 		<?php }
 		$button_hover_style = ob_get_clean();
 		?>
@@ -85,37 +85,39 @@ class ActionHooks {
         <style>
             .cptwooint-cart-form {
                 display: flex;
-                <?php if( $field_gap ) { ?>
-                    gap: <?php echo absint( $field_gap )?>px;
-                <?php } ?>
+            <?php if( $field_gap ) { ?> gap: <?php echo absint( $field_gap )?>px;
+            <?php } ?>
             }
 
             <?php if( $field_style ){ ?>
-                .cptwooint-cart-form input[type="number"],
-                .cptwooint-cart-form input[type="number"] {
-                    box-sizing: border-box;
-                    padding: 5px 10px;
-                    border: 1px solid;
-                    <?php echo $field_style; ?>
-                }
+            .cptwooint-cart-form input[type="number"],
+            .cptwooint-cart-form input[type="number"] {
+                box-sizing: border-box;
+                padding: 5px 10px;
+                border: 1px solid;
+            <?php echo esc_html( $field_style ); ?>
+            }
+
             <?php }?>
 
             <?php if( $button_style ){ ?>
-                .cptwooint-cart-form input[type="submit"] {
-                    box-sizing: border-box;
-                    padding: 5px 10px;
-                    transition: 0.3s all;
-                    cursor: pointer;
-                    border: 1px solid;
-                    <?php echo $button_style ; ?>
-                }
+            .cptwooint-cart-form input[type="submit"] {
+                box-sizing: border-box;
+                padding: 5px 10px;
+                transition: 0.3s all;
+                cursor: pointer;
+                border: 1px solid;
+            <?php echo esc_html( $button_style ) ; ?>
+            }
+
             <?php }?>
 
             <?php if( $button_hover_style ){ ?>
-                .cptwooint-cart-form input[type="submit"]:focus ,
-                .cptwooint-cart-form input[type="submit"]:hover {
-                    <?php echo $button_hover_style ; ?>
-                }
+            .cptwooint-cart-form input[type="submit"]:focus,
+            .cptwooint-cart-form input[type="submit"]:hover {
+            <?php echo esc_html( $button_hover_style  ); ?>
+            }
+
             <?php } ?>
 
         </style>
@@ -169,8 +171,8 @@ class ActionHooks {
 		if ( ! Fns::is_supported( $current_post_type ) ) {
 			return;
 		}
-		$options = Fns::get_options();
-        $cart_url = $options['redirect_to_cart_page'] ? wc_get_cart_url() : '';
+		$options  = Fns::get_options();
+		$cart_url = $options['redirect_to_cart_page'] ? wc_get_cart_url() : '';
 		ob_start();
 		do_action( 'cptwooint_before_display_add_tocart_form' );
 		?>
