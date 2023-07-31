@@ -48,7 +48,7 @@ class FilterHooks {
 			return $content;
 		}
 		$options = Fns::get_options();
-
+		$content .= '<div class="cpt-price-and-cart-button">';
 		if(
 			! empty( $options['price_position'] ) &&
 		    ! empty( $options['price_after_content_post_types'] ) &&
@@ -68,7 +68,7 @@ class FilterHooks {
 		){
 			$content .=  do_shortcode( '[cptwooint_cart_button/]');
 		}
-
+		$content .= '</div>';
 		return $content;
 	}
 
