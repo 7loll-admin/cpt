@@ -6,7 +6,7 @@
  * Description:       Integrate custom post type with woocommerce. Sell Any Kind Of post
  * Version:           1.0.0
  * Author:            Tiny Solutions
- * Author URI:        https://wptinysolutions.com/
+ * Author URI:        https://profiles.wordpress.org/tinysolution
  * Text Domain:       cptwooint
  * Domain Path:       /languages
  *

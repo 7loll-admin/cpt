@@ -34,7 +34,7 @@ class Dependencies {
 	 */
 	public function check() {
 
-		add_action( 'wp_ajax_cptwooint_plugin_activation', [ __CLASS__, 'activate_plugin'] );
+		add_action( 'wp_ajax_cptwooint_plugin_activation', [ __CLASS__, 'activate_plugin' ] );
 		// TODO:: AJax plugin installation will do later.
 		self::notice();
 
@@ -84,8 +84,8 @@ class Dependencies {
 				'button_txt' => $button_text,
 			];
 			if ( $this->is_plugins_installed( $woocommerce ) ) {
-                unset( $this->missing['woocommerce']['slug'] );
-            }
+				unset( $this->missing['woocommerce']['slug'] );
+			}
 		}
 
 		if ( ! empty( $this->missing ) ) {
@@ -133,7 +133,7 @@ class Dependencies {
 			if ( current_user_can( 'activate_plugins' ) ) {
 				$button = '<p><a data-plugin="' . esc_attr( json_encode( $plugin ) ) . '" href="' . esc_url( $plugin['url'] ) . '" class="button-primary plugin-install-by-ajax">' . esc_html( $plugin['button_txt'] ) . '</a></p>';
 				// $plugin['message'] Already used escaping function
-				printf( '<div class="error notice_error"><p>%1$s</p>%2$s</div>', $plugin['message'], $button ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				printf( '<div class="cptwint-wrapper error notice_error"><p>%1$s</p>%2$s</div>', $plugin['message'], $button ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			} else {
 				$missingPlugins .= '<strong>' . esc_html( $plugin['name'] ) . '</strong>' . $sep;
 			}
@@ -162,14 +162,16 @@ class Dependencies {
 			wp_enqueue_script( 'updates' );
 		} );
 
-		add_action( 'admin_footer', function () { ?>
+		add_action( 'admin_print_styles', function () {
+			?>
             <style>
-                .wp-core-ui .plugin-install-by-ajax {
+                .wp-core-ui .cptwint-wrapper .plugin-install-by-ajax {
                     display: inline-flex;
                     align-items: center;
                     gap: 20px;
                 }
-                .cptwint-loader {
+
+                .cptwint-wrapper .cptwint-loader {
                     border: 4px solid #f3f3f3;
                     border-radius: 50%;
                     border-top: 4px solid #3498db;
@@ -179,6 +181,7 @@ class Dependencies {
                     animation: spin 2s linear infinite;
                     margin-left: 5px;
                 }
+
                 /* Safari */
                 @-webkit-keyframes spin {
                     0% {
@@ -188,6 +191,7 @@ class Dependencies {
                         -webkit-transform: rotate(360deg);
                     }
                 }
+
                 @keyframes spin {
                     0% {
                         transform: rotate(0deg);
@@ -197,35 +201,41 @@ class Dependencies {
                     }
                 }
             </style>
+			<?php
+		} );
+
+		// Footer Script
+		add_action( 'admin_print_footer_scripts', function () { ?>
+
             <script type="text/javascript">
                 (function ($) {
-
                     function ajaxActive( that, plugin ){
 
                         if( that.attr("disabled") ){
                             return;
                         }
-
                         $.ajax({
-                            url: '<?php echo admin_url( 'admin-ajax.php' ); ?>',
+                            url: '<?php echo esc_url( admin_url( 'admin-ajax.php' ) );?>',
                             data: {
                                 action: 'cptwooint_plugin_activation',
                                 plugin_slug: plugin.slug ? plugin.slug : null,
                                 activation_file: plugin.file_name,
-                                cptwooint_wpnonce: '<?php echo wp_create_nonce( cptwooint()->nonceId ); ?>',
+                                cptwooint_wpnonce: '<?php echo esc_js( wp_create_nonce( cptwooint()->nonceId ) ); ?>',
                             },
                             type: 'POST',
                             beforeSend() {
-                                that.html( 'Activation Prosses Running... <div class="cptwint-loader"></div>' );
+                                that.html('Activation Prosses Running... <div class="cptwint-loader"></div>');
                             },
                             success(response) {
                                 that.html( 'Activation Prosses Done' );
                                 that.removeClass('plugin-install-by-ajax');
                                 that.attr('disabled','disabled');
                             },
-                            error(e) {},
+                            error(e) {
+                            },
                         });
                     }
+
                     setTimeout(function () {
                         $('.plugin-install-by-ajax')
                             .on('click', function (e) {
@@ -234,28 +244,28 @@ class Dependencies {
                                 if( that.attr("disabled") ){
                                     return;
                                 }
-                                var plugin =  $(this).data('plugin') ;
-                                console.log( plugin.file_name )
-                                if ( plugin.slug ) {
+                                var plugin = $(this).data('plugin');
+                                console.log(plugin.file_name)
+                                if (plugin.slug) {
                                     wp.updates.installPlugin({
                                         slug: plugin.slug,
                                         success: function (pluginData) {
-                                            console.log( pluginData, 'Plugin installed successfully!' );
-                                            if ( pluginData.activateUrl ) {
-                                                that.html( 'Activation Prosses Running... <div class="cptwint-loader"></div>' );
-                                                ajaxActive(that, plugin );
+                                            console.log(pluginData, 'Plugin installed successfully!');
+                                            if (pluginData.activateUrl) {
+                                                that.html('Activation Prosses Running... <div class="cptwint-loader"></div>');
+                                                ajaxActive(that, plugin);
                                             }
                                         },
                                         error: function (error) {
-                                            console.log( 'An error occurred: ' + error.statusText );
+                                            console.log('An error occurred: ' + error.statusText);
                                         },
                                         installing: function () {
-                                            that.html( 'Installing plugin... <div class="cptwint-loader"></div>' );
-                                            console.log( 'Installing plugin...!' );
+                                            that.html('Installing plugin... <div class="cptwint-loader"></div>');
+                                            console.log('Installing plugin...!');
                                         }
                                     });
                                 } else {
-                                    ajaxActive(that, plugin )
+                                    ajaxActive(that, plugin)
                                 }
 
                             });
@@ -273,20 +283,19 @@ class Dependencies {
 			'success' => false,
 		];
 		if ( ! Fns::verify_nonce() ) {
-			wp_send_json_error($return);
+			wp_send_json_error( $return );
 		}
-		if ( ! empty( $_REQUEST['activation_file'] ) && is_plugin_inactive( $_REQUEST['activation_file'] )) {
+		if ( ! empty( $_REQUEST['activation_file'] ) && is_plugin_inactive( $_REQUEST['activation_file'] ) ) {
 			activate_plugin( sanitize_text_field( $_REQUEST['activation_file'] ) );
 			$return['success'] = true;
 		}
-        if( $return['success'] ){
-		    return wp_send_json_success( $return );
-        } else {
-	        wp_send_json_error( $return );
-        }
+		if ( $return['success'] ) {
+			return wp_send_json_success( $return );
+		} else {
+			wp_send_json_error( $return );
+		}
 		wp_die();
 	}
-
 
 
 }
