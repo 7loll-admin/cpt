@@ -148,11 +148,11 @@ class ActionHooks {
 		}
 		$meta_key = Fns::meta_key( $current_post_type );
 		if ( $meta_key ) {
-			$price = absint( get_post_meta( get_the_ID(), $meta_key, true ) );
+			$price = get_post_meta( get_the_ID(), $meta_key, true );
 		}
 		ob_start();
 		do_action( 'cptwooint_before_display_price' );
-		echo $price;
+		echo esc_html( $price );
 		do_action( 'cptwooint_after_display_price' );
 
 		return ob_get_clean();
