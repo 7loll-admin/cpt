@@ -47,6 +47,15 @@ class FilterHooks {
 		if( ! Fns::is_supported( $current_post_type ) ){
 			return $content;
 		}
+		$price = '';
+		$meta_key = Fns::meta_key( $current_post_type );
+		if ( $meta_key ) {
+			$price = get_post_meta( get_the_ID(), $meta_key, true );
+		}
+		if( ! $price ){
+			return $content;
+		}
+
 		$options = Fns::get_options();
 		$content .= '<div class="cpt-price-and-cart-button">';
 		if(
