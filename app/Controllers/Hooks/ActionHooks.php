@@ -152,7 +152,7 @@ class ActionHooks {
 		}
 		ob_start();
 		do_action( 'cptwooint_before_display_price' );
-		echo esc_html( $price );
+		echo wc_price( $price );
 		do_action( 'cptwooint_after_display_price' );
 
 		return ob_get_clean();
