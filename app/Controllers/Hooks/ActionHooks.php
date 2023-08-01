@@ -148,7 +148,7 @@ class ActionHooks {
 		}
 		$meta_key = Fns::meta_key( $current_post_type );
 		if ( $meta_key ) {
-			$price = get_post_meta( get_the_ID(), $meta_key, true );
+			$price = floatval( get_post_meta( get_the_ID(), $meta_key, true ) );
 		}
 		ob_start();
 		do_action( 'cptwooint_before_display_price' );

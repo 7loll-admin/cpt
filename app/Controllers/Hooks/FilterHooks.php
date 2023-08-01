@@ -94,7 +94,7 @@ class FilterHooks {
 		}
 		$meta_key = Fns::meta_key( $current_post_type );
 		if( $meta_key ){
-			$price = get_post_meta( $product->get_id(), $meta_key, true );
+			$price = floatval( get_post_meta( get_the_ID(), $meta_key, true ) );
 		}
 		return $price;
 	}
